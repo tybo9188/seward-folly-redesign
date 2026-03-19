@@ -346,36 +346,19 @@
       height: 0;
     }
 
-    /* Section top ad bar: underwriting + ad side by side */
+    /* Section top: underwriting bar + display ad stacked */
     .feed-section__topbar {
       display: flex;
-      align-items: stretch;
+      flex-direction: column;
       gap: 0;
       margin-bottom: 28px;
     }
     .feed-section__topbar .feed-underwriting {
-      flex: 1;
       margin-bottom: 0;
-      border-radius: 0 0 0 4px;
-      border-right: 1px solid rgba(74,124,135,.15);
+      border-radius: 0 0 0 0;
     }
     .feed-section__topbar .feed-ad {
-      padding: 10px 20px;
-      background: var(--glacier-light);
-      border-radius: 0 0 4px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .feed-section__topbar .feed-ad__label {
-      margin-bottom: 4px;
-    }
-    .feed-section__topbar .feed-ad__box--mrec {
-      width: 200px;
-      height: 40px;
-      border: 1px solid rgba(74,124,135,.2);
-      background: rgba(255,255,255,.6);
+      padding: 20px 0;
     }
 
     /* Underwriting — right after section header */
@@ -424,7 +407,7 @@
     }
     .feed-card__img-placeholder {
       width: 300px;
-      height: 250px;
+      height: 300px;
       border-radius: 4px;
     }
     .feed-card__body {
@@ -455,30 +438,25 @@
 
     /* ── Sponsored content card (native ad) ───────── */
     .feed-card--sponsored {
-      background: var(--cream);
-      border: 1px solid var(--divider);
-      border-radius: 6px;
-      padding: 24px;
       margin-top: 32px;
       border-bottom: none;
       margin-bottom: 0;
-      padding-bottom: 24px;
+      padding-bottom: 0;
       position: relative;
     }
-    .feed-card--sponsored .feed-card__sponsored-label {
-      position: absolute;
-      top: 10px;
-      right: 16px;
+    .feed-card__sponsored-label {
       font-size: 9px;
       font-weight: 700;
       letter-spacing: .14em;
       text-transform: uppercase;
       color: var(--ink-soft);
       opacity: .5;
+      margin-top: 32px;
+      margin-bottom: 8px;
     }
     .feed-card--sponsored .feed-card__img-placeholder {
       width: 300px;
-      height: 250px;
+      height: 300px;
     }
     .feed-card--sponsored .feed-card__headline {
       font-size: 22px;
@@ -701,9 +679,7 @@
       .feed-layout { grid-template-columns: 1fr; }
       .feed-sidebar { display: none; }
       .feed-card__img-link { width: 300px; }
-      .feed-section__topbar { flex-direction: column; }
-      .feed-section__topbar .feed-underwriting { border-right: none; border-bottom: 1px solid rgba(74,124,135,.15); border-radius: 0; }
-      .feed-section__topbar .feed-ad { border-radius: 0 0 4px 4px; }
+      .feed-section__topbar .feed-ad__box--mrec { max-width: 100%; }
     }
 
     @media (max-width: 768px) {
@@ -711,13 +687,12 @@
       .masthead__date { padding-left: 0; margin-top: 8px; }
       .feed-card { flex-direction: column; gap: 16px; }
       .feed-card__img-link { width: 100%; }
-      .feed-card__img-placeholder { width: 100%; height: auto; aspect-ratio: 300/250; }
+      .feed-card__img-placeholder { width: 100%; height: auto; aspect-ratio: 1/1; }
       .feed-card__headline { font-size: 23px; }
       .feed-card__excerpt { font-size: 16px; }
       .feed-ad__box--leaderboard { width: 100%; height: 70px; }
       .feed-ad__box--billboard { width: 100%; height: auto; aspect-ratio: 970/250; min-height: 120px; }
-      .feed-card--sponsored { padding: 16px; }
-      .feed-card--sponsored .feed-card__img-placeholder { width: 100%; height: auto; aspect-ratio: 300/250; }
+      .feed-card--sponsored .feed-card__img-placeholder { width: 100%; height: auto; aspect-ratio: 1/1; }
       .newsletter__inner { grid-template-columns: 1fr; gap: 20px; text-align: center; }
       .newsletter__form { justify-content: center; }
       .newsletter__input { width: 220px; }
@@ -879,7 +854,7 @@
             <div class="feed-ad">
               <div class="feed-ad__label">Ad</div>
               <div class="feed-ad__box feed-ad__box--mrec">
-                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+                <div class="feed-ad__placeholder">300 × 250 Medium Rectangle<br><a href="#">Advertise with The Folly</a></div>
               </div>
             </div>
           </div>
@@ -910,8 +885,8 @@
           </article>
 
           <!-- Sponsored content card -->
+          <div class="feed-card__sponsored-label">Sponsored</div>
           <article class="feed-card feed-card--sponsored">
-            <span class="feed-card__sponsored-label">Sponsored</span>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
             <div class="feed-card__body">
               <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
@@ -945,7 +920,7 @@
             <div class="feed-ad">
               <div class="feed-ad__label">Ad</div>
               <div class="feed-ad__box feed-ad__box--mrec">
-                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+                <div class="feed-ad__placeholder">300 × 250 Medium Rectangle<br><a href="#">Advertise with The Folly</a></div>
               </div>
             </div>
           </div>
@@ -960,8 +935,8 @@
           </article>
 
           <!-- Sponsored content card -->
+          <div class="feed-card__sponsored-label">Sponsored</div>
           <article class="feed-card feed-card--sponsored">
-            <span class="feed-card__sponsored-label">Sponsored</span>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
             <div class="feed-card__body">
               <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
@@ -998,7 +973,7 @@
             <div class="feed-ad">
               <div class="feed-ad__label">Ad</div>
               <div class="feed-ad__box feed-ad__box--mrec">
-                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+                <div class="feed-ad__placeholder">300 × 250 Medium Rectangle<br><a href="#">Advertise with The Folly</a></div>
               </div>
             </div>
           </div>
@@ -1021,8 +996,8 @@
           </article>
 
           <!-- Sponsored content card -->
+          <div class="feed-card__sponsored-label">Sponsored</div>
           <article class="feed-card feed-card--sponsored">
-            <span class="feed-card__sponsored-label">Sponsored</span>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
             <div class="feed-card__body">
               <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
@@ -1059,7 +1034,7 @@
             <div class="feed-ad">
               <div class="feed-ad__label">Ad</div>
               <div class="feed-ad__box feed-ad__box--mrec">
-                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+                <div class="feed-ad__placeholder">300 × 250 Medium Rectangle<br><a href="#">Advertise with The Folly</a></div>
               </div>
             </div>
           </div>
@@ -1082,8 +1057,8 @@
           </article>
 
           <!-- Sponsored content card -->
+          <div class="feed-card__sponsored-label">Sponsored</div>
           <article class="feed-card feed-card--sponsored">
-            <span class="feed-card__sponsored-label">Sponsored</span>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
             <div class="feed-card__body">
               <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
@@ -1120,7 +1095,7 @@
             <div class="feed-ad">
               <div class="feed-ad__label">Ad</div>
               <div class="feed-ad__box feed-ad__box--mrec">
-                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+                <div class="feed-ad__placeholder">300 × 250 Medium Rectangle<br><a href="#">Advertise with The Folly</a></div>
               </div>
             </div>
           </div>
@@ -1135,8 +1110,8 @@
           </article>
 
           <!-- Sponsored content card -->
+          <div class="feed-card__sponsored-label">Sponsored</div>
           <article class="feed-card feed-card--sponsored">
-            <span class="feed-card__sponsored-label">Sponsored</span>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
             <div class="feed-card__body">
               <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
@@ -1173,7 +1148,7 @@
             <div class="feed-ad">
               <div class="feed-ad__label">Ad</div>
               <div class="feed-ad__box feed-ad__box--mrec">
-                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+                <div class="feed-ad__placeholder">300 × 250 Medium Rectangle<br><a href="#">Advertise with The Folly</a></div>
               </div>
             </div>
           </div>
@@ -1188,8 +1163,8 @@
           </article>
 
           <!-- Sponsored content card -->
+          <div class="feed-card__sponsored-label">Sponsored</div>
           <article class="feed-card feed-card--sponsored">
-            <span class="feed-card__sponsored-label">Sponsored</span>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
             <div class="feed-card__body">
               <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
@@ -1226,7 +1201,7 @@
             <div class="feed-ad">
               <div class="feed-ad__label">Ad</div>
               <div class="feed-ad__box feed-ad__box--mrec">
-                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+                <div class="feed-ad__placeholder">300 × 250 Medium Rectangle<br><a href="#">Advertise with The Folly</a></div>
               </div>
             </div>
           </div>
@@ -1241,8 +1216,8 @@
           </article>
 
           <!-- Sponsored content card -->
+          <div class="feed-card__sponsored-label">Sponsored</div>
           <article class="feed-card feed-card--sponsored">
-            <span class="feed-card__sponsored-label">Sponsored</span>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
             <div class="feed-card__body">
               <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
@@ -1279,7 +1254,7 @@
             <div class="feed-ad">
               <div class="feed-ad__label">Ad</div>
               <div class="feed-ad__box feed-ad__box--mrec">
-                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+                <div class="feed-ad__placeholder">300 × 250 Medium Rectangle<br><a href="#">Advertise with The Folly</a></div>
               </div>
             </div>
           </div>
@@ -1294,8 +1269,8 @@
           </article>
 
           <!-- Sponsored content card -->
+          <div class="feed-card__sponsored-label">Sponsored</div>
           <article class="feed-card feed-card--sponsored">
-            <span class="feed-card__sponsored-label">Sponsored</span>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
             <div class="feed-card__body">
               <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
@@ -1332,7 +1307,7 @@
             <div class="feed-ad">
               <div class="feed-ad__label">Ad</div>
               <div class="feed-ad__box feed-ad__box--mrec">
-                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+                <div class="feed-ad__placeholder">300 × 250 Medium Rectangle<br><a href="#">Advertise with The Folly</a></div>
               </div>
             </div>
           </div>
@@ -1355,8 +1330,8 @@
           </article>
 
           <!-- Sponsored content card -->
+          <div class="feed-card__sponsored-label">Sponsored</div>
           <article class="feed-card feed-card--sponsored">
-            <span class="feed-card__sponsored-label">Sponsored</span>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
             <div class="feed-card__body">
               <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
@@ -1393,7 +1368,7 @@
             <div class="feed-ad">
               <div class="feed-ad__label">Ad</div>
               <div class="feed-ad__box feed-ad__box--mrec">
-                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+                <div class="feed-ad__placeholder">300 × 250 Medium Rectangle<br><a href="#">Advertise with The Folly</a></div>
               </div>
             </div>
           </div>
@@ -1408,8 +1383,8 @@
           </article>
 
           <!-- Sponsored content card -->
+          <div class="feed-card__sponsored-label">Sponsored</div>
           <article class="feed-card feed-card--sponsored">
-            <span class="feed-card__sponsored-label">Sponsored</span>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
             <div class="feed-card__body">
               <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
