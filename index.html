@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Seward Folly – Seward, Alaska's Community Voice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & base ────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:      #1a1a2e;
+      --ink-soft: #3d3d5c;
+      --slate:    #2c3e50;
+      --glacier:  #4a7c87;
+      --glacier-light: #d6eaed;
+      --tundra:   #7a8c6e;
+      --cream:    #f8f5f0;
+      --warm-white: #fdfcfa;
+      --sand:     #e8dcc8;
+      --rust:     #b5451b;
+      --gold:     #c9973a;
+      --divider:  #d8d0c4;
+      --serif:    'Playfair Display', Georgia, serif;
+      --sans:     'Source Sans 3', system-ui, sans-serif;
+    }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--warm-white);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Utility ────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Masthead ───────────────────────────────── */
+    .masthead {
+      background: var(--warm-white);
+      border-bottom: 3px solid var(--ink);
+      padding: 20px 0 16px;
+    }
+    .masthead__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .masthead__brand {
+      display: flex;
+      flex-direction: column;
+    }
+    .masthead__logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .masthead__mountain {
+      width: 52px;
+      height: 40px;
+      flex-shrink: 0;
+    }
+    .masthead__title {
+      font-family: var(--serif);
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: -.01em;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .masthead__date {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--ink-soft);
+      margin-top: 6px;
+      padding-left: 64px;
+      letter-spacing: .03em;
+    }
+    .masthead__right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+    /* Social icons in masthead */
+    .masthead__social {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .masthead__social a {
+      display: inline-flex;
+      align-items: center;
+      color: var(--ink-soft);
+      transition: color .2s;
+    }
+    .masthead__social a:hover { color: var(--ink); text-decoration: none; }
+    /* Thin separator */
+    .masthead__sep {
+      width: 1px;
+      height: 24px;
+      background: var(--divider);
+      flex-shrink: 0;
+    }
+
+    /* ── Buttons ────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border-radius: 3px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .2s;
+      border: 2px solid transparent;
+      text-decoration: none !important;
+      white-space: nowrap;
+    }
+    /* Primary: Subscribe Free — filled ink */
+    .btn--subscribe {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+    .btn--subscribe:hover { background: #0d0d20; border-color: #0d0d20; }
+    /* Secondary: Donate — outline */
+    .btn--donate {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+    .btn--donate:hover { background: var(--ink); color: #fff; }
+
+    /* ── Nav ────────────────────────────────────── */
+    .nav {
+      background: var(--ink);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+    .nav__item {
+      position: relative;
+    }
+    .nav__link {
+      display: block;
+      padding: 14px 22px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.75);
+      transition: color .2s, background .2s;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .nav__link:hover {
+      color: #fff;
+      background: rgba(255,255,255,.07);
+      text-decoration: none;
+    }
+    /* Subscribe Free nav CTA */
+    .nav__link--subscribe {
+      background: var(--glacier);
+      color: #fff !important;
+      margin-left: 8px;
+    }
+    .nav__link--subscribe:hover { background: #3d6b75 !important; }
+    /* Dropdown */
+    .nav__dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--slate);
+      min-width: 210px;
+      padding: 8px 0;
+      box-shadow: 0 8px 24px rgba(0,0,0,.3);
+    }
+    .nav__item:hover .nav__dropdown { display: block; }
+    .nav__dropdown a {
+      display: block;
+      padding: 9px 18px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.7);
+    }
+    .nav__dropdown a:hover {
+      color: #fff;
+      background: rgba(255,255,255,.08);
+      text-decoration: none;
+    }
+
+    /* ── Story feed ─────────────────────────────── */
+    .feed {
+      padding: 40px 0 0;
+    }
+    .feed-card {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      padding-bottom: 36px;
+      margin-bottom: 36px;
+      border-bottom: 1px solid var(--divider);
+    }
+    .feed-card:last-child { border-bottom: none; }
+    .feed-card__img-link {
+      display: block;
+      flex-shrink: 0;
+      width: 440px;
+    }
+    .feed-card__img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: 4px;
+    }
+    .feed-card__body {
+      flex: 1;
+      min-width: 0;
+      padding-top: 4px;
+    }
+    .feed-card__category {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--glacier);
+      margin-bottom: 10px;
+    }
+    .feed-card__headline {
+      font-family: var(--sans);
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+    .feed-card__headline a:hover { color: var(--glacier); text-decoration: none; }
+    .feed-card__excerpt {
+      font-size: 18px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .feed-card__meta {
+      font-size: 14px;
+      color: var(--ink-soft);
+      opacity: .8;
+    }
+
+    /* ── Load more button ───────────────────────── */
+    .feed-more {
+      text-align: center;
+      padding: 12px 0 0;
+    }
+    .feed-more__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 36px;
+      border-radius: 4px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      color: var(--ink);
+      background: transparent;
+      border: 2px solid var(--ink);
+      cursor: pointer;
+      transition: all .2s;
+      text-decoration: none !important;
+    }
+    .feed-more__btn:hover {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    /* ── Feed ad unit ───────────────────────────── */
+    .feed-ad {
+      margin: 0 0 36px;
+    }
+    .feed-ad__label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      opacity: .45;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+    .feed-ad__box {
+      background: var(--cream);
+      border: 1px solid var(--divider);
+      border-radius: 3px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .feed-ad__placeholder {
+      font-size: 13px;
+      color: var(--ink-soft);
+      opacity: .5;
+      text-align: center;
+      line-height: 1.6;
+    }
+    .feed-ad__placeholder a {
+      color: var(--glacier);
+      font-weight: 700;
+    }
+    .feed-ad__placeholder a:hover { text-decoration: underline; }
+
+    /* ── Newsletter banner ──────────────────────── */
+    .newsletter {
+      background: var(--glacier);
+      color: #fff;
+      padding: 44px 0;
+      margin-top: 40px;
+    }
+    .newsletter__inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 32px;
+    }
+    .newsletter__kicker {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.75);
+      margin-bottom: 6px;
+    }
+    .newsletter__heading {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .newsletter__sub { font-size: 14px; opacity: .8; }
+    .newsletter__form { display: flex; gap: 0; }
+    .newsletter__input {
+      padding: 12px 16px;
+      font-size: 14px;
+      border: none;
+      border-radius: 3px 0 0 3px;
+      width: 260px;
+      background: rgba(255,255,255,.2);
+      color: #fff;
+      outline: none;
+    }
+    .newsletter__input::placeholder { color: rgba(255,255,255,.55); }
+    .newsletter__input:focus { background: rgba(255,255,255,.28); }
+    .newsletter__submit {
+      padding: 12px 20px;
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      border-radius: 0 3px 3px 0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .newsletter__submit:hover { background: #0d0d1a; }
+
+    /* ── Footer ─────────────────────────────────── */
+    .footer {
+      background: var(--ink);
+      color: rgba(255,255,255,.7);
+      font-size: 13px;
+      padding: 48px 0 24px;
+    }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1.2fr 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+    .footer__brand-title {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    .footer__mission {
+      font-size: 13px;
+      line-height: 1.7;
+      opacity: .75;
+    }
+    .footer__social {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .footer__social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.7);
+      transition: all .2s;
+    }
+    .footer__social a:hover {
+      background: rgba(255,255,255,.1);
+      color: #fff;
+      text-decoration: none;
+    }
+    .footer__col-heading {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .footer__links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer__links a {
+      color: rgba(255,255,255,.65);
+      font-size: 13px;
+      transition: color .2s;
+    }
+    .footer__links a:hover { color: #fff; text-decoration: none; }
+    .footer__contact {
+      margin-top: 20px;
+      font-size: 12px;
+      opacity: .55;
+      line-height: 1.7;
+    }
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      opacity: .5;
+    }
+
+    /* ── Color helpers ──────────────────────────── */
+    .bg-glacier { background: var(--glacier); }
+    .bg-tundra   { background: var(--tundra); }
+    .bg-rust     { background: var(--rust); }
+    .bg-slate    { background: var(--slate); }
+    .bg-ink      { background: var(--ink); }
+    .bg-ink-soft { background: var(--ink-soft); }
+
+    /* ── Responsive ─────────────────────────────── */
+    @media (max-width: 960px) {
+      .masthead__inner { gap: 12px; }
+      .footer__grid { grid-template-columns: 1fr 1fr; }
+      .feed { padding: 32px 0 0; }
+    }
+
+    @media (max-width: 768px) {
+      .masthead__title { font-size: 26px; }
+      .masthead__date { padding-left: 0; margin-top: 8px; }
+      .feed-card { flex-direction: column; gap: 16px; }
+      .feed-card__img-link { width: 100%; }
+      .feed-card__headline { font-size: 23px; }
+      .feed-card__excerpt { font-size: 16px; }
+      .newsletter__inner { grid-template-columns: 1fr; gap: 20px; text-align: center; }
+      .newsletter__form { justify-content: center; }
+      .newsletter__input { width: 220px; }
+      .footer__grid { grid-template-columns: 1fr 1fr; }
+      .nav__inner { justify-content: flex-start; overflow-x: auto; }
+      .masthead__right .btn--donate { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .masthead__title { font-size: 22px; }
+      .masthead__mountain { width: 40px; height: 31px; }
+      .masthead__date { display: none; }
+      .masthead__social { display: none; }
+      .footer__grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── MASTHEAD (no top bar) ─────────────────────── -->
+<header class="masthead">
+  <div class="container">
+    <div class="masthead__inner">
+
+      <!-- Left: logo + date -->
+      <div class="masthead__brand">
+        <div class="masthead__logo-wrap">
+          <svg class="masthead__mountain" viewBox="0 0 80 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 4L14 46H66L40 4Z" fill="#1a1a2e"/>
+            <path d="M55 18L36 46H74L55 18Z" fill="#3d3d5c"/>
+            <path d="M22 28L6 54H38L22 28Z" fill="#4a7c87" opacity=".8"/>
+            <path d="M4 54H76" stroke="#1a1a2e" stroke-width="3" stroke-linecap="round"/>
+            <path d="M37 4L40 4L43 4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <h1 class="masthead__title">The Seward Folly</h1>
+        </div>
+        <p class="masthead__date">Thursday, March 19, 2026</p>
+      </div>
+
+      <!-- Right: social icons | Donate | Subscribe Free -->
+      <div class="masthead__right">
+        <div class="masthead__social">
+          <a href="#" title="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+          <a href="#" title="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+        </div>
+        <div class="masthead__sep"></div>
+        <a href="#" class="btn btn--donate">Donate</a>
+        <a href="#" class="btn btn--subscribe">Subscribe Free</a>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- ── NAV ──────────────────────────────────────── -->
+<nav class="nav">
+  <div class="container">
+    <div class="nav__inner">
+
+      <!-- News dropdown -->
+      <div class="nav__item">
+        <a href="#" class="nav__link">News ▾</a>
+        <div class="nav__dropdown">
+          <a href="#">Arts &amp; Entertainment</a>
+          <a href="#">Business</a>
+          <a href="#">Community</a>
+          <a href="#">Education</a>
+          <a href="#">Government</a>
+          <a href="#">Health</a>
+          <a href="#">Housing</a>
+          <a href="#">Obituaries</a>
+          <a href="#">Opinions</a>
+          <a href="#">Police &amp; Fire</a>
+          <a href="#">Sports</a>
+        </div>
+      </div>
+
+      <!-- Resources dropdown -->
+      <div class="nav__item">
+        <a href="#" class="nav__link">Resources ▾</a>
+        <div class="nav__dropdown">
+          <a href="#">Business Directory</a>
+          <a href="#">Business Login</a>
+          <a href="#">Calendar</a>
+          <a href="#">Links</a>
+          <a href="#">Public Notices</a>
+        </div>
+      </div>
+
+      <!-- About dropdown -->
+      <div class="nav__item">
+        <a href="#" class="nav__link">About ▾</a>
+        <div class="nav__dropdown">
+          <a href="#">About Us</a>
+          <a href="#">Advertise</a>
+          <a href="#">Contact</a>
+          <a href="#">Donate</a>
+          <a href="#">Sponsors</a>
+          <a href="#">Submit a Story</a>
+        </div>
+      </div>
+
+      <!-- Subscribe CTA — always visible -->
+      <div class="nav__item">
+        <a href="#" class="nav__link nav__link--subscribe">Subscribe Free</a>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!-- ── MAIN CONTENT ──────────────────────────────── -->
+<main>
+  <div class="container">
+    <div class="feed">
+
+      <!-- ── Story 1 ── -->
+      <article class="feed-card">
+        <a href="#" class="feed-card__img-link">
+          <div class="feed-card__img-placeholder" style="background:linear-gradient(160deg,#2c3e50 0%,#4a7c87 60%,#7a8c6e 100%);"></div>
+        </a>
+        <div class="feed-card__body">
+          <div class="feed-card__category">Hometown Heroes</div>
+          <h2 class="feed-card__headline"><a href="#">Travis Beals of Seward takes second place in the 2026 Iditarod Trail Sled Dog Race</a></h2>
+          <p class="feed-card__excerpt">Seward's own Travis Beals crossed the Nome finish line in second place, cementing his place among Alaska's elite mushers in one of the world's most challenging races.</p>
+          <div class="feed-card__meta">By Staff · March 19, 2026</div>
+        </div>
+      </article>
+
+      <!-- ── Story 2 ── -->
+      <article class="feed-card">
+        <a href="#" class="feed-card__img-link">
+          <div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#2a5a6e,#4a7c87);"></div>
+        </a>
+        <div class="feed-card__body">
+          <div class="feed-card__category">Sports</div>
+          <h2 class="feed-card__headline"><a href="#">Seahawks capture back-to-back 2A State Basketball Titles</a></h2>
+          <p class="feed-card__excerpt">The Seward Seahawks made history this weekend in Anchorage, winning their second consecutive state basketball championship in a thrilling overtime finish.</p>
+          <div class="feed-card__meta">By Staff · March 18, 2026</div>
+        </div>
+      </article>
+
+      <!-- ── Story 3 ── -->
+      <article class="feed-card">
+        <a href="#" class="feed-card__img-link">
+          <div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#4a3520,#8b6340);"></div>
+        </a>
+        <div class="feed-card__body">
+          <div class="feed-card__category">Sports</div>
+          <h2 class="feed-card__headline"><a href="#">Seward Cheer Squad shines at State, takes top honors</a></h2>
+          <p class="feed-card__excerpt">The Seahawks cheer team brought home gold from this year's statewide competition, earning top marks in all three judged categories.</p>
+          <div class="feed-card__meta">By Staff · March 19, 2026</div>
+        </div>
+      </article>
+
+      <!-- ── Ad after story 3 ── -->
+      <div class="feed-ad">
+        <div class="feed-ad__label">Advertisement</div>
+        <div class="feed-ad__box">
+          <div class="feed-ad__placeholder">Your business here · Reach Seward readers every week · <a href="#">Learn about advertising</a></div>
+        </div>
+      </div>
+
+      <!-- ── Story 4 ── -->
+      <article class="feed-card">
+        <a href="#" class="feed-card__img-link">
+          <div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#3d5a3e,#7a8c6e);"></div>
+        </a>
+        <div class="feed-card__body">
+          <div class="feed-card__category">Government</div>
+          <h2 class="feed-card__headline"><a href="#">School funding dominates borough assembly meeting</a></h2>
+          <p class="feed-card__excerpt">The Kenai Peninsula Borough Assembly heard extensive public testimony Monday on proposed cuts to the Seward City Schools budget for the 2026–27 school year.</p>
+          <div class="feed-card__meta">By Staff · March 19, 2026</div>
+        </div>
+      </article>
+
+      <!-- ── Story 5 ── -->
+      <article class="feed-card">
+        <a href="#" class="feed-card__img-link">
+          <div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#1e4d5c,#4a7c87);"></div>
+        </a>
+        <div class="feed-card__body">
+          <div class="feed-card__category">Community</div>
+          <h2 class="feed-card__headline"><a href="#">Seward Events Guide: March 19–26, 2026</a></h2>
+          <p class="feed-card__excerpt">Your weekly look at what's happening around town — from gallery openings to community dinners and everything in between.</p>
+          <div class="feed-card__meta">By Staff · March 19, 2026</div>
+        </div>
+      </article>
+
+      <!-- ── Story 6 ── -->
+      <article class="feed-card">
+        <a href="#" class="feed-card__img-link">
+          <div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#2e4a2e,#5a8a5a);"></div>
+        </a>
+        <div class="feed-card__body">
+          <div class="feed-card__category">Education</div>
+          <h2 class="feed-card__headline"><a href="#">Port Partners Initiative at AVTEC: 'Shark Tank' comes to Seward</a></h2>
+          <p class="feed-card__excerpt">Students pitch maritime business ideas to a panel of industry professionals in a new workforce development event at AVTEC's campus.</p>
+          <div class="feed-card__meta">By Staff · March 19, 2026</div>
+        </div>
+      </article>
+
+      <!-- ── Ad after story 6 ── -->
+      <div class="feed-ad">
+        <div class="feed-ad__label">Advertisement</div>
+        <div class="feed-ad__box">
+          <div class="feed-ad__placeholder">Your business here · Reach Seward readers every week · <a href="#">Learn about advertising</a></div>
+        </div>
+      </div>
+
+      <!-- ── Story 7 ── -->
+      <article class="feed-card">
+        <a href="#" class="feed-card__img-link">
+          <div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#2c3e50,#455a64);"></div>
+        </a>
+        <div class="feed-card__body">
+          <div class="feed-card__category">Government</div>
+          <h2 class="feed-card__headline"><a href="#">From the City Manager: March 2026 update</a></h2>
+          <p class="feed-card__excerpt">City Manager Tom Clemons shares an update on infrastructure projects, budget planning, and upcoming public meetings this spring.</p>
+          <div class="feed-card__meta">By Tom Clemons · March 19, 2026</div>
+        </div>
+      </article>
+
+      <!-- ── Story 8 ── -->
+      <article class="feed-card">
+        <a href="#" class="feed-card__img-link">
+          <div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#3d5a3e,#5a7c5a);"></div>
+        </a>
+        <div class="feed-card__body">
+          <div class="feed-card__category">Community</div>
+          <h2 class="feed-card__headline"><a href="#">March and April happenings at Qutekcak Native Tribe</a></h2>
+          <p class="feed-card__excerpt">The Qutekcak Native Tribe has a full calendar of community events, cultural programs, and gatherings planned through April.</p>
+          <div class="feed-card__meta">By Staff · March 19, 2026</div>
+        </div>
+      </article>
+
+      <!-- ── Story 9 ── -->
+      <article class="feed-card">
+        <a href="#" class="feed-card__img-link">
+          <div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#1a1a2e,#3d3d5c);"></div>
+        </a>
+        <div class="feed-card__body">
+          <div class="feed-card__category">Police &amp; Fire</div>
+          <h2 class="feed-card__headline"><a href="#">Police Blotter: March 12–17, 2026</a></h2>
+          <p class="feed-card__excerpt">A summary of Seward Police Department activity for the week, including incident reports and notable calls for service.</p>
+          <div class="feed-card__meta">By Staff · March 19, 2026</div>
+        </div>
+      </article>
+
+      <!-- ── Ad after story 9 ── -->
+      <div class="feed-ad">
+        <div class="feed-ad__label">Advertisement</div>
+        <div class="feed-ad__box">
+          <div class="feed-ad__placeholder">Your business here · Reach Seward readers every week · <a href="#">Learn about advertising</a></div>
+        </div>
+      </div>
+
+      <!-- ── Story 10 ── -->
+      <article class="feed-card">
+        <a href="#" class="feed-card__img-link">
+          <div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#4a3520,#7a5a30);"></div>
+        </a>
+        <div class="feed-card__body">
+          <div class="feed-card__category">Police &amp; Fire</div>
+          <h2 class="feed-card__headline"><a href="#">Spring Creek prison's January brawl — what we know</a></h2>
+          <p class="feed-card__excerpt">Two months after a reported disturbance at Spring Creek Correctional Center, here's what officials have disclosed — and what they haven't.</p>
+          <div class="feed-card__meta">By Staff · March 12, 2026</div>
+        </div>
+      </article>
+
+      <!-- ── Story 11 ── -->
+      <article class="feed-card">
+        <a href="#" class="feed-card__img-link">
+          <div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#3d2e1e,#8c6030);"></div>
+        </a>
+        <div class="feed-card__body">
+          <div class="feed-card__category">Opinions</div>
+          <h2 class="feed-card__headline"><a href="#">Commentary: Reflections on digital minimalism and modern life</a></h2>
+          <p class="feed-card__excerpt">A Seward resident explores what it means to step back from constant connectivity in an increasingly digital world.</p>
+          <div class="feed-card__meta">By Guest Contributor · March 19, 2026</div>
+        </div>
+      </article>
+
+      <!-- ── Story 12 ── -->
+      <article class="feed-card">
+        <a href="#" class="feed-card__img-link">
+          <div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#1e3a4a,#2e6a7a);"></div>
+        </a>
+        <div class="feed-card__body">
+          <div class="feed-card__category">Health</div>
+          <h2 class="feed-card__headline"><a href="#">Providence Seward announces expanded urgent care hours for spring</a></h2>
+          <p class="feed-card__excerpt">Starting April 1, Providence Seward Medical Center will extend urgent care availability to meet growing patient demand heading into tourist season.</p>
+          <div class="feed-card__meta">By Staff · March 17, 2026</div>
+        </div>
+      </article>
+
+      <!-- ── Ad after story 12 ── -->
+      <div class="feed-ad">
+        <div class="feed-ad__label">Advertisement</div>
+        <div class="feed-ad__box">
+          <div class="feed-ad__placeholder">Your business here · Reach Seward readers every week · <a href="#">Learn about advertising</a></div>
+        </div>
+      </div>
+
+      <!-- ── Story 13 ── -->
+      <article class="feed-card">
+        <a href="#" class="feed-card__img-link">
+          <div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#3a2a4a,#6a4a8a);"></div>
+        </a>
+        <div class="feed-card__body">
+          <div class="feed-card__category">Business</div>
+          <h2 class="feed-card__headline"><a href="#">New waterfront restaurant set to open Memorial Day weekend</a></h2>
+          <p class="feed-card__excerpt">A Seward couple is bringing a farm-to-table concept to the small boat harbor, aiming to open in time for the summer tourist season.</p>
+          <div class="feed-card__meta">By Staff · March 15, 2026</div>
+        </div>
+      </article>
+
+      <!-- ── Story 14 ── -->
+      <article class="feed-card">
+        <a href="#" class="feed-card__img-link">
+          <div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#2a3a2a,#4a6a3a);"></div>
+        </a>
+        <div class="feed-card__body">
+          <div class="feed-card__category">Housing</div>
+          <h2 class="feed-card__headline"><a href="#">City council approves rezoning request for new workforce housing development</a></h2>
+          <p class="feed-card__excerpt">The 32-unit project on Dimond Boulevard cleared its final regulatory hurdle Tuesday, with construction expected to begin this summer.</p>
+          <div class="feed-card__meta">By Staff · March 15, 2026</div>
+        </div>
+      </article>
+
+      <!-- ── Story 15 ── -->
+      <article class="feed-card">
+        <a href="#" class="feed-card__img-link">
+          <div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#1e2e3e,#3a5a6e);"></div>
+        </a>
+        <div class="feed-card__body">
+          <div class="feed-card__category">Education</div>
+          <h2 class="feed-card__headline"><a href="#">Seward High seniors recognized at statewide academic decathlon</a></h2>
+          <p class="feed-card__excerpt">Three Seward High School seniors placed in the top ten at this year's Alaska Academic Decathlon, the school's best showing in over a decade.</p>
+          <div class="feed-card__meta">By Staff · March 14, 2026</div>
+        </div>
+      </article>
+
+      <!-- ── Load more ── -->
+      <div class="feed-more">
+        <a href="#" class="feed-more__btn">See more stories →</a>
+      </div>
+
+    </div><!-- /feed -->
+  </div><!-- /container -->
+
+  <!-- ── NEWSLETTER ─────────────────────────────── -->
+  <div class="newsletter">
+    <div class="container">
+      <div class="newsletter__inner">
+        <div>
+          <div class="newsletter__kicker">Stay informed</div>
+          <h2 class="newsletter__heading">Get Seward's news delivered to your inbox</h2>
+          <p class="newsletter__sub">Free weekly digest · No spam · Unsubscribe anytime</p>
+        </div>
+        <form class="newsletter__form" onsubmit="return false;">
+          <input class="newsletter__input" type="email" placeholder="your@email.com" />
+          <button class="newsletter__submit" type="submit">Subscribe Free</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── FOOTER ────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+
+      <!-- Brand col -->
+      <div>
+        <div class="footer__brand-title">The Seward Folly</div>
+        <p class="footer__mission">Our vision is to be the eyes, ears, and voice of our community.<br>Our mission is to inform, educate, and connect the people of Seward, Alaska.</p>
+        <div class="footer__social">
+          <a href="#" title="Facebook">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+          <a href="#" title="Instagram">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+        </div>
+        <div class="footer__contact">
+          P.O. Box 1983<br>Seward, AK 99664<br>sewardsfolly25@gmail.com
+        </div>
+      </div>
+
+      <!-- News -->
+      <div>
+        <div class="footer__col-heading">News</div>
+        <ul class="footer__links">
+          <li><a href="#">Arts &amp; Entertainment</a></li>
+          <li><a href="#">Business</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Education</a></li>
+          <li><a href="#">Government</a></li>
+          <li><a href="#">Health</a></li>
+          <li><a href="#">Housing</a></li>
+          <li><a href="#">Obituaries</a></li>
+          <li><a href="#">Opinions</a></li>
+          <li><a href="#">Police &amp; Fire</a></li>
+          <li><a href="#">Sports</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <div class="footer__col-heading">Resources</div>
+        <ul class="footer__links">
+          <li><a href="#">Business Directory</a></li>
+          <li><a href="#">Business Login</a></li>
+          <li><a href="#">Calendar</a></li>
+          <li><a href="#">Links</a></li>
+          <li><a href="#">Public Notices</a></li>
+        </ul>
+      </div>
+
+      <!-- About -->
+      <div>
+        <div class="footer__col-heading">About</div>
+        <ul class="footer__links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Advertise</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Donate</a></li>
+          <li><a href="#">Sponsors</a></li>
+          <li><a href="#">Submit a Story</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 The Seward Folly. All rights reserved.</span>
+      <span>Made with ♥ for Seward, Alaska</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
