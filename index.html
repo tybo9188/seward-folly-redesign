@@ -280,12 +280,23 @@
       background: var(--cream);
       border: 1px solid var(--divider);
       border-radius: 3px;
-      width: 728px;
-      height: 90px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+    .feed-ad__box--leaderboard {
+      width: 728px;
+      height: 90px;
+    }
+    .feed-ad__box--billboard {
+      width: 970px;
+      height: 250px;
+      max-width: 100%;
+    }
+    .feed-ad__box--mrec {
+      width: 300px;
+      height: 250px;
     }
     .feed-ad__placeholder {
       font-size: 12px;
@@ -335,6 +346,38 @@
       height: 0;
     }
 
+    /* Section top ad bar: underwriting + ad side by side */
+    .feed-section__topbar {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      margin-bottom: 28px;
+    }
+    .feed-section__topbar .feed-underwriting {
+      flex: 1;
+      margin-bottom: 0;
+      border-radius: 0 0 0 4px;
+      border-right: 1px solid rgba(74,124,135,.15);
+    }
+    .feed-section__topbar .feed-ad {
+      padding: 10px 20px;
+      background: var(--glacier-light);
+      border-radius: 0 0 4px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .feed-section__topbar .feed-ad__label {
+      margin-bottom: 4px;
+    }
+    .feed-section__topbar .feed-ad__box--mrec {
+      width: 200px;
+      height: 40px;
+      border: 1px solid rgba(74,124,135,.2);
+      background: rgba(255,255,255,.6);
+    }
+
     /* Underwriting — right after section header */
     .feed-underwriting {
       background: var(--glacier-light);
@@ -373,14 +416,15 @@
       margin-bottom: 0;
       padding-bottom: 0;
     }
+    /* Story images: IAB Medium Rectangle 300×250 */
     .feed-card__img-link {
       display: block;
       flex-shrink: 0;
-      width: 380px;
+      width: 300px;
     }
     .feed-card__img-placeholder {
-      width: 100%;
-      aspect-ratio: 4/3;
+      width: 300px;
+      height: 250px;
       border-radius: 4px;
     }
     .feed-card__body {
@@ -408,6 +452,63 @@
       color: var(--ink-soft);
       opacity: .8;
     }
+
+    /* ── Sponsored content card (native ad) ───────── */
+    .feed-card--sponsored {
+      background: var(--cream);
+      border: 1px solid var(--divider);
+      border-radius: 6px;
+      padding: 24px;
+      margin-top: 32px;
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 24px;
+      position: relative;
+    }
+    .feed-card--sponsored .feed-card__sponsored-label {
+      position: absolute;
+      top: 10px;
+      right: 16px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      opacity: .5;
+    }
+    .feed-card--sponsored .feed-card__img-placeholder {
+      width: 300px;
+      height: 250px;
+    }
+    .feed-card--sponsored .feed-card__headline {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .feed-card--sponsored .feed-card__headline a { color: var(--ink); }
+    .feed-card--sponsored .feed-card__headline a:hover { color: var(--glacier); }
+    .feed-card--sponsored .feed-card__excerpt {
+      font-size: 16px;
+      margin-bottom: 14px;
+    }
+    .feed-card__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 20px;
+      border-radius: 3px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--glacier);
+      border: none;
+      cursor: pointer;
+      transition: background .2s;
+      text-decoration: none !important;
+    }
+    .feed-card__cta:hover { background: #3d6b75; }
 
     /* ── Section footer: More Stories ───────────── */
     .feed-section__footer {
@@ -591,14 +692,18 @@
 
     /* ── Responsive ─────────────────────────────── */
     @media (max-width: 1060px) {
-      .feed-ad__box { width: 100%; max-width: 728px; }
+      .feed-ad__box--leaderboard { width: 100%; max-width: 728px; }
+      .feed-ad__box--billboard { width: 100%; max-width: 970px; }
     }
     @media (max-width: 960px) {
       .masthead__inner { gap: 12px; }
       .footer__grid { grid-template-columns: 1fr 1fr; }
       .feed-layout { grid-template-columns: 1fr; }
       .feed-sidebar { display: none; }
-      .feed-card__img-link { width: 340px; }
+      .feed-card__img-link { width: 300px; }
+      .feed-section__topbar { flex-direction: column; }
+      .feed-section__topbar .feed-underwriting { border-right: none; border-bottom: 1px solid rgba(74,124,135,.15); border-radius: 0; }
+      .feed-section__topbar .feed-ad { border-radius: 0 0 4px 4px; }
     }
 
     @media (max-width: 768px) {
@@ -606,9 +711,13 @@
       .masthead__date { padding-left: 0; margin-top: 8px; }
       .feed-card { flex-direction: column; gap: 16px; }
       .feed-card__img-link { width: 100%; }
+      .feed-card__img-placeholder { width: 100%; height: auto; aspect-ratio: 300/250; }
       .feed-card__headline { font-size: 23px; }
       .feed-card__excerpt { font-size: 16px; }
-      .feed-ad__box { width: 100%; height: 70px; }
+      .feed-ad__box--leaderboard { width: 100%; height: 70px; }
+      .feed-ad__box--billboard { width: 100%; height: auto; aspect-ratio: 970/250; min-height: 120px; }
+      .feed-card--sponsored { padding: 16px; }
+      .feed-card--sponsored .feed-card__img-placeholder { width: 100%; height: auto; aspect-ratio: 300/250; }
       .newsletter__inner { grid-template-columns: 1fr; gap: 20px; text-align: center; }
       .newsletter__form { justify-content: center; }
       .newsletter__input { width: 220px; }
@@ -739,39 +848,40 @@
       <aside class="feed-sidebar">
         <div class="feed-sidebar__label">This Week</div>
         <ul class="feed-sidebar__links">
-          <li><a href="#section-sports" class="feed-sidebar__link">Sports</a></li>
-          <li><a href="#section-community" class="feed-sidebar__link">Community</a></li>
-          <li><a href="#section-government" class="feed-sidebar__link">Government</a></li>
-          <li><a href="#section-education" class="feed-sidebar__link">Education</a></li>
-          <li><a href="#section-police-fire" class="feed-sidebar__link">Police &amp; Fire</a></li>
+          <li><a href="#section-featured" class="feed-sidebar__link">Featured</a></li>
           <li><a href="#section-business" class="feed-sidebar__link">Business</a></li>
-          <li><a href="#section-opinions" class="feed-sidebar__link">Opinions</a></li>
+          <li><a href="#section-community" class="feed-sidebar__link">Community</a></li>
+          <li><a href="#section-education" class="feed-sidebar__link">Education</a></li>
+          <li><a href="#section-government" class="feed-sidebar__link">Government</a></li>
           <li><a href="#section-health" class="feed-sidebar__link">Health</a></li>
           <li><a href="#section-housing" class="feed-sidebar__link">Housing</a></li>
+          <li><a href="#section-opinions" class="feed-sidebar__link">Opinions</a></li>
+          <li><a href="#section-police-fire" class="feed-sidebar__link">Police &amp; Fire</a></li>
+          <li><a href="#section-sports" class="feed-sidebar__link">Sports</a></li>
         </ul>
       </aside>
 
       <!-- ── FEED MAIN COLUMN ─────────────────────── -->
       <div class="feed-main">
 
-        <!-- ── Top ad (Leaderboard 728×90) ─────────── -->
-        <div class="feed-ad">
-          <div class="feed-ad__label">Advertisement</div>
-          <div class="feed-ad__box">
-            <div class="feed-ad__placeholder">728 × 90 Leaderboard · <a href="#">Advertise with The Folly</a><div class="feed-ad__size">IAB Standard Leaderboard</div></div>
-          </div>
-        </div>
-
-        <!-- ═══ SPORTS ═══════════════════════════════ -->
-        <section class="feed-section" id="section-sports">
+        <!-- ═══ FEATURED ═══════════════════════════════ -->
+        <section class="feed-section" id="section-featured">
           <div class="feed-section__header">
-            <h2 class="feed-section__title">Sports</h2>
+            <h2 class="feed-section__title">Featured</h2>
             <div class="feed-section__line"></div>
           </div>
-          <div class="feed-underwriting">
-            <span class="feed-underwriting__label">Underwritten by</span>
-            <span class="feed-underwriting__sponsor">Your Business Name</span>
-            · <a href="#">Become an underwriter</a>
+          <div class="feed-section__topbar">
+            <div class="feed-underwriting">
+              <span class="feed-underwriting__label">Underwritten by</span>
+              <span class="feed-underwriting__sponsor">Your Business Name</span>
+              · <a href="#">Become an underwriter</a>
+            </div>
+            <div class="feed-ad">
+              <div class="feed-ad__label">Ad</div>
+              <div class="feed-ad__box feed-ad__box--mrec">
+                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+              </div>
+            </div>
           </div>
 
           <article class="feed-card">
@@ -779,7 +889,7 @@
             <div class="feed-card__body">
               <h2 class="feed-card__headline"><a href="#">Travis Beals of Seward takes second place in the 2026 Iditarod Trail Sled Dog Race</a></h2>
               <p class="feed-card__excerpt">Seward's own Travis Beals crossed the Nome finish line in second place, cementing his place among Alaska's elite mushers in one of the world's most challenging races.</p>
-              <div class="feed-card__meta">By Staff · March 19, 2026</div>
+              <div class="feed-card__meta">Sports · By Staff · March 19, 2026</div>
             </div>
           </article>
           <article class="feed-card">
@@ -787,41 +897,110 @@
             <div class="feed-card__body">
               <h2 class="feed-card__headline"><a href="#">Seahawks capture back-to-back 2A State Basketball Titles</a></h2>
               <p class="feed-card__excerpt">The Seward Seahawks made history this weekend in Anchorage, winning their second consecutive state basketball championship in a thrilling overtime finish.</p>
-              <div class="feed-card__meta">By Staff · March 18, 2026</div>
+              <div class="feed-card__meta">Sports · By Staff · March 18, 2026</div>
             </div>
           </article>
           <article class="feed-card">
-            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#4a3520,#8b6340);"></div></a>
+            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#3d5a3e,#7a8c6e);"></div></a>
             <div class="feed-card__body">
-              <h2 class="feed-card__headline"><a href="#">Seward Cheer Squad shines at State, takes top honors</a></h2>
-              <p class="feed-card__excerpt">The Seahawks cheer team brought home gold from this year's statewide competition, earning top marks in all three judged categories.</p>
-              <div class="feed-card__meta">By Staff · March 19, 2026</div>
+              <h2 class="feed-card__headline"><a href="#">School funding dominates borough assembly meeting</a></h2>
+              <p class="feed-card__excerpt">The Kenai Peninsula Borough Assembly heard extensive public testimony Monday on proposed cuts to the Seward City Schools budget for the 2026–27 school year.</p>
+              <div class="feed-card__meta">Government · By Staff · March 19, 2026</div>
+            </div>
+          </article>
+
+          <!-- Sponsored content card -->
+          <article class="feed-card feed-card--sponsored">
+            <span class="feed-card__sponsored-label">Sponsored</span>
+            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
+            <div class="feed-card__body">
+              <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
+              <p class="feed-card__excerpt">Advertiser preview text goes here. Reach engaged Seward readers with a native ad that looks and feels like editorial content.</p>
+              <a href="#" class="feed-card__cta">Learn More →</a>
+            </div>
+          </article>
+
+        </section>
+
+        <!-- ── Billboard ad between sections (970×250) ── -->
+        <div class="feed-ad feed-ad--between">
+          <div class="feed-ad__label">Advertisement</div>
+          <div class="feed-ad__box feed-ad__box--billboard">
+            <div class="feed-ad__placeholder">970 × 250 Billboard · <a href="#">Advertise with The Folly</a><div class="feed-ad__size">IAB Standard Billboard</div></div>
+          </div>
+        </div>
+
+        <!-- ═══ BUSINESS ═══════════════════════════════ -->
+        <section class="feed-section" id="section-business">
+          <div class="feed-section__header">
+            <h2 class="feed-section__title">Business</h2>
+            <div class="feed-section__line"></div>
+          </div>
+          <div class="feed-section__topbar">
+            <div class="feed-underwriting">
+              <span class="feed-underwriting__label">Underwritten by</span>
+              <span class="feed-underwriting__sponsor">Your Business Name</span>
+              · <a href="#">Become an underwriter</a>
+            </div>
+            <div class="feed-ad">
+              <div class="feed-ad__label">Ad</div>
+              <div class="feed-ad__box feed-ad__box--mrec">
+                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+              </div>
+            </div>
+          </div>
+
+          <article class="feed-card">
+            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#3a2a4a,#6a4a8a);"></div></a>
+            <div class="feed-card__body">
+              <h2 class="feed-card__headline"><a href="#">New waterfront restaurant set to open Memorial Day weekend</a></h2>
+              <p class="feed-card__excerpt">A Seward couple is bringing a farm-to-table concept to the small boat harbor, aiming to open in time for the summer tourist season.</p>
+              <div class="feed-card__meta">By Staff · March 15, 2026</div>
+            </div>
+          </article>
+
+          <!-- Sponsored content card -->
+          <article class="feed-card feed-card--sponsored">
+            <span class="feed-card__sponsored-label">Sponsored</span>
+            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
+            <div class="feed-card__body">
+              <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
+              <p class="feed-card__excerpt">Advertiser preview text goes here. Reach Seward's business community with a native ad placement.</p>
+              <a href="#" class="feed-card__cta">Learn More →</a>
             </div>
           </article>
 
           <div class="feed-section__footer">
-            <div class="feed-section__actions"><a href="#" class="feed-section__more">More Sports →</a></div>
+            <div class="feed-section__actions"><a href="#" class="feed-section__more">More Business →</a></div>
           </div>
         </section>
 
-        <!-- ── Ad between sections ── -->
+        <!-- ── Billboard ad between sections ── -->
         <div class="feed-ad feed-ad--between">
           <div class="feed-ad__label">Advertisement</div>
-          <div class="feed-ad__box">
-            <div class="feed-ad__placeholder">728 × 90 · <a href="#">Advertise with The Folly</a></div>
+          <div class="feed-ad__box feed-ad__box--billboard">
+            <div class="feed-ad__placeholder">970 × 250 Billboard · <a href="#">Advertise with The Folly</a><div class="feed-ad__size">IAB Standard Billboard</div></div>
           </div>
         </div>
 
-        <!-- ═══ COMMUNITY ════════════════════════════ -->
+        <!-- ═══ COMMUNITY ══════════════════════════════ -->
         <section class="feed-section" id="section-community">
           <div class="feed-section__header">
             <h2 class="feed-section__title">Community</h2>
             <div class="feed-section__line"></div>
           </div>
-          <div class="feed-underwriting">
-            <span class="feed-underwriting__label">Underwritten by</span>
-            <span class="feed-underwriting__sponsor">Your Business Name</span>
-            · <a href="#">Become an underwriter</a>
+          <div class="feed-section__topbar">
+            <div class="feed-underwriting">
+              <span class="feed-underwriting__label">Underwritten by</span>
+              <span class="feed-underwriting__sponsor">Your Business Name</span>
+              · <a href="#">Become an underwriter</a>
+            </div>
+            <div class="feed-ad">
+              <div class="feed-ad__label">Ad</div>
+              <div class="feed-ad__box feed-ad__box--mrec">
+                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+              </div>
+            </div>
           </div>
 
           <article class="feed-card">
@@ -841,71 +1020,48 @@
             </div>
           </article>
 
+          <!-- Sponsored content card -->
+          <article class="feed-card feed-card--sponsored">
+            <span class="feed-card__sponsored-label">Sponsored</span>
+            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
+            <div class="feed-card__body">
+              <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
+              <p class="feed-card__excerpt">Advertiser preview text goes here. Connect with Seward's community through a native ad placement.</p>
+              <a href="#" class="feed-card__cta">Learn More →</a>
+            </div>
+          </article>
+
           <div class="feed-section__footer">
             <div class="feed-section__actions"><a href="#" class="feed-section__more">More Community →</a></div>
           </div>
         </section>
 
-        <!-- ── Ad between sections ── -->
+        <!-- ── Billboard ad between sections ── -->
         <div class="feed-ad feed-ad--between">
           <div class="feed-ad__label">Advertisement</div>
-          <div class="feed-ad__box">
-            <div class="feed-ad__placeholder">728 × 90 · <a href="#">Advertise with The Folly</a></div>
+          <div class="feed-ad__box feed-ad__box--billboard">
+            <div class="feed-ad__placeholder">970 × 250 Billboard · <a href="#">Advertise with The Folly</a><div class="feed-ad__size">IAB Standard Billboard</div></div>
           </div>
         </div>
 
-        <!-- ═══ GOVERNMENT ═══════════════════════════ -->
-        <section class="feed-section" id="section-government">
-          <div class="feed-section__header">
-            <h2 class="feed-section__title">Government</h2>
-            <div class="feed-section__line"></div>
-          </div>
-          <div class="feed-underwriting">
-            <span class="feed-underwriting__label">Underwritten by</span>
-            <span class="feed-underwriting__sponsor">Your Business Name</span>
-            · <a href="#">Become an underwriter</a>
-          </div>
-
-          <article class="feed-card">
-            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#3d5a3e,#7a8c6e);"></div></a>
-            <div class="feed-card__body">
-              <h2 class="feed-card__headline"><a href="#">School funding dominates borough assembly meeting</a></h2>
-              <p class="feed-card__excerpt">The Kenai Peninsula Borough Assembly heard extensive public testimony Monday on proposed cuts to the Seward City Schools budget for the 2026–27 school year.</p>
-              <div class="feed-card__meta">By Staff · March 19, 2026</div>
-            </div>
-          </article>
-          <article class="feed-card">
-            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#2c3e50,#455a64);"></div></a>
-            <div class="feed-card__body">
-              <h2 class="feed-card__headline"><a href="#">From the City Manager: March 2026 update</a></h2>
-              <p class="feed-card__excerpt">City Manager Tom Clemons shares an update on infrastructure projects, budget planning, and upcoming public meetings this spring.</p>
-              <div class="feed-card__meta">By Tom Clemons · March 19, 2026</div>
-            </div>
-          </article>
-
-          <div class="feed-section__footer">
-            <div class="feed-section__actions"><a href="#" class="feed-section__more">More Government →</a></div>
-          </div>
-        </section>
-
-        <!-- ── Ad between sections ── -->
-        <div class="feed-ad feed-ad--between">
-          <div class="feed-ad__label">Advertisement</div>
-          <div class="feed-ad__box">
-            <div class="feed-ad__placeholder">728 × 90 · <a href="#">Advertise with The Folly</a></div>
-          </div>
-        </div>
-
-        <!-- ═══ EDUCATION ════════════════════════════ -->
+        <!-- ═══ EDUCATION ══════════════════════════════ -->
         <section class="feed-section" id="section-education">
           <div class="feed-section__header">
             <h2 class="feed-section__title">Education</h2>
             <div class="feed-section__line"></div>
           </div>
-          <div class="feed-underwriting">
-            <span class="feed-underwriting__label">Underwritten by</span>
-            <span class="feed-underwriting__sponsor">Your Business Name</span>
-            · <a href="#">Become an underwriter</a>
+          <div class="feed-section__topbar">
+            <div class="feed-underwriting">
+              <span class="feed-underwriting__label">Underwritten by</span>
+              <span class="feed-underwriting__sponsor">Your Business Name</span>
+              · <a href="#">Become an underwriter</a>
+            </div>
+            <div class="feed-ad">
+              <div class="feed-ad__label">Ad</div>
+              <div class="feed-ad__box feed-ad__box--mrec">
+                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+              </div>
+            </div>
           </div>
 
           <article class="feed-card">
@@ -925,29 +1081,260 @@
             </div>
           </article>
 
+          <!-- Sponsored content card -->
+          <article class="feed-card feed-card--sponsored">
+            <span class="feed-card__sponsored-label">Sponsored</span>
+            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
+            <div class="feed-card__body">
+              <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
+              <p class="feed-card__excerpt">Advertiser preview text goes here. Reach Seward's educators and families with a native ad placement.</p>
+              <a href="#" class="feed-card__cta">Learn More →</a>
+            </div>
+          </article>
+
           <div class="feed-section__footer">
             <div class="feed-section__actions"><a href="#" class="feed-section__more">More Education →</a></div>
           </div>
         </section>
 
-        <!-- ── Ad between sections ── -->
+        <!-- ── Billboard ad between sections ── -->
         <div class="feed-ad feed-ad--between">
           <div class="feed-ad__label">Advertisement</div>
-          <div class="feed-ad__box">
-            <div class="feed-ad__placeholder">728 × 90 · <a href="#">Advertise with The Folly</a></div>
+          <div class="feed-ad__box feed-ad__box--billboard">
+            <div class="feed-ad__placeholder">970 × 250 Billboard · <a href="#">Advertise with The Folly</a><div class="feed-ad__size">IAB Standard Billboard</div></div>
           </div>
         </div>
 
-        <!-- ═══ POLICE & FIRE ════════════════════════ -->
+        <!-- ═══ GOVERNMENT ═════════════════════════════ -->
+        <section class="feed-section" id="section-government">
+          <div class="feed-section__header">
+            <h2 class="feed-section__title">Government</h2>
+            <div class="feed-section__line"></div>
+          </div>
+          <div class="feed-section__topbar">
+            <div class="feed-underwriting">
+              <span class="feed-underwriting__label">Underwritten by</span>
+              <span class="feed-underwriting__sponsor">Your Business Name</span>
+              · <a href="#">Become an underwriter</a>
+            </div>
+            <div class="feed-ad">
+              <div class="feed-ad__label">Ad</div>
+              <div class="feed-ad__box feed-ad__box--mrec">
+                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+              </div>
+            </div>
+          </div>
+
+          <article class="feed-card">
+            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#2c3e50,#455a64);"></div></a>
+            <div class="feed-card__body">
+              <h2 class="feed-card__headline"><a href="#">From the City Manager: March 2026 update</a></h2>
+              <p class="feed-card__excerpt">City Manager Tom Clemons shares an update on infrastructure projects, budget planning, and upcoming public meetings this spring.</p>
+              <div class="feed-card__meta">By Tom Clemons · March 19, 2026</div>
+            </div>
+          </article>
+
+          <!-- Sponsored content card -->
+          <article class="feed-card feed-card--sponsored">
+            <span class="feed-card__sponsored-label">Sponsored</span>
+            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
+            <div class="feed-card__body">
+              <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
+              <p class="feed-card__excerpt">Advertiser preview text goes here. Reach engaged civic-minded Seward readers.</p>
+              <a href="#" class="feed-card__cta">Learn More →</a>
+            </div>
+          </article>
+
+          <div class="feed-section__footer">
+            <div class="feed-section__actions"><a href="#" class="feed-section__more">More Government →</a></div>
+          </div>
+        </section>
+
+        <!-- ── Billboard ad between sections ── -->
+        <div class="feed-ad feed-ad--between">
+          <div class="feed-ad__label">Advertisement</div>
+          <div class="feed-ad__box feed-ad__box--billboard">
+            <div class="feed-ad__placeholder">970 × 250 Billboard · <a href="#">Advertise with The Folly</a><div class="feed-ad__size">IAB Standard Billboard</div></div>
+          </div>
+        </div>
+
+        <!-- ═══ HEALTH ═════════════════════════════════ -->
+        <section class="feed-section" id="section-health">
+          <div class="feed-section__header">
+            <h2 class="feed-section__title">Health</h2>
+            <div class="feed-section__line"></div>
+          </div>
+          <div class="feed-section__topbar">
+            <div class="feed-underwriting">
+              <span class="feed-underwriting__label">Underwritten by</span>
+              <span class="feed-underwriting__sponsor">Your Business Name</span>
+              · <a href="#">Become an underwriter</a>
+            </div>
+            <div class="feed-ad">
+              <div class="feed-ad__label">Ad</div>
+              <div class="feed-ad__box feed-ad__box--mrec">
+                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+              </div>
+            </div>
+          </div>
+
+          <article class="feed-card">
+            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#1e3a4a,#2e6a7a);"></div></a>
+            <div class="feed-card__body">
+              <h2 class="feed-card__headline"><a href="#">Providence Seward announces expanded urgent care hours for spring</a></h2>
+              <p class="feed-card__excerpt">Starting April 1, Providence Seward Medical Center will extend urgent care availability to meet growing patient demand heading into tourist season.</p>
+              <div class="feed-card__meta">By Staff · March 17, 2026</div>
+            </div>
+          </article>
+
+          <!-- Sponsored content card -->
+          <article class="feed-card feed-card--sponsored">
+            <span class="feed-card__sponsored-label">Sponsored</span>
+            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
+            <div class="feed-card__body">
+              <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
+              <p class="feed-card__excerpt">Advertiser preview text goes here. Reach health-conscious Seward readers.</p>
+              <a href="#" class="feed-card__cta">Learn More →</a>
+            </div>
+          </article>
+
+          <div class="feed-section__footer">
+            <div class="feed-section__actions"><a href="#" class="feed-section__more">More Health →</a></div>
+          </div>
+        </section>
+
+        <!-- ── Billboard ad between sections ── -->
+        <div class="feed-ad feed-ad--between">
+          <div class="feed-ad__label">Advertisement</div>
+          <div class="feed-ad__box feed-ad__box--billboard">
+            <div class="feed-ad__placeholder">970 × 250 Billboard · <a href="#">Advertise with The Folly</a><div class="feed-ad__size">IAB Standard Billboard</div></div>
+          </div>
+        </div>
+
+        <!-- ═══ HOUSING ════════════════════════════════ -->
+        <section class="feed-section" id="section-housing">
+          <div class="feed-section__header">
+            <h2 class="feed-section__title">Housing</h2>
+            <div class="feed-section__line"></div>
+          </div>
+          <div class="feed-section__topbar">
+            <div class="feed-underwriting">
+              <span class="feed-underwriting__label">Underwritten by</span>
+              <span class="feed-underwriting__sponsor">Your Business Name</span>
+              · <a href="#">Become an underwriter</a>
+            </div>
+            <div class="feed-ad">
+              <div class="feed-ad__label">Ad</div>
+              <div class="feed-ad__box feed-ad__box--mrec">
+                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+              </div>
+            </div>
+          </div>
+
+          <article class="feed-card">
+            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#2a3a2a,#4a6a3a);"></div></a>
+            <div class="feed-card__body">
+              <h2 class="feed-card__headline"><a href="#">City council approves rezoning request for new workforce housing development</a></h2>
+              <p class="feed-card__excerpt">The 32-unit project on Dimond Boulevard cleared its final regulatory hurdle Tuesday, with construction expected to begin this summer.</p>
+              <div class="feed-card__meta">By Staff · March 15, 2026</div>
+            </div>
+          </article>
+
+          <!-- Sponsored content card -->
+          <article class="feed-card feed-card--sponsored">
+            <span class="feed-card__sponsored-label">Sponsored</span>
+            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
+            <div class="feed-card__body">
+              <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
+              <p class="feed-card__excerpt">Advertiser preview text goes here. Reach Seward's housing and real estate audience.</p>
+              <a href="#" class="feed-card__cta">Learn More →</a>
+            </div>
+          </article>
+
+          <div class="feed-section__footer">
+            <div class="feed-section__actions"><a href="#" class="feed-section__more">More Housing →</a></div>
+          </div>
+        </section>
+
+        <!-- ── Billboard ad between sections ── -->
+        <div class="feed-ad feed-ad--between">
+          <div class="feed-ad__label">Advertisement</div>
+          <div class="feed-ad__box feed-ad__box--billboard">
+            <div class="feed-ad__placeholder">970 × 250 Billboard · <a href="#">Advertise with The Folly</a><div class="feed-ad__size">IAB Standard Billboard</div></div>
+          </div>
+        </div>
+
+        <!-- ═══ OPINIONS ═══════════════════════════════ -->
+        <section class="feed-section" id="section-opinions">
+          <div class="feed-section__header">
+            <h2 class="feed-section__title">Opinions</h2>
+            <div class="feed-section__line"></div>
+          </div>
+          <div class="feed-section__topbar">
+            <div class="feed-underwriting">
+              <span class="feed-underwriting__label">Underwritten by</span>
+              <span class="feed-underwriting__sponsor">Your Business Name</span>
+              · <a href="#">Become an underwriter</a>
+            </div>
+            <div class="feed-ad">
+              <div class="feed-ad__label">Ad</div>
+              <div class="feed-ad__box feed-ad__box--mrec">
+                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+              </div>
+            </div>
+          </div>
+
+          <article class="feed-card">
+            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#3d2e1e,#8c6030);"></div></a>
+            <div class="feed-card__body">
+              <h2 class="feed-card__headline"><a href="#">Commentary: Reflections on digital minimalism and modern life</a></h2>
+              <p class="feed-card__excerpt">A Seward resident explores what it means to step back from constant connectivity in an increasingly digital world.</p>
+              <div class="feed-card__meta">By Guest Contributor · March 19, 2026</div>
+            </div>
+          </article>
+
+          <!-- Sponsored content card -->
+          <article class="feed-card feed-card--sponsored">
+            <span class="feed-card__sponsored-label">Sponsored</span>
+            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
+            <div class="feed-card__body">
+              <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
+              <p class="feed-card__excerpt">Advertiser preview text goes here. Share your perspective with Seward's engaged opinion readers.</p>
+              <a href="#" class="feed-card__cta">Learn More →</a>
+            </div>
+          </article>
+
+          <div class="feed-section__footer">
+            <div class="feed-section__actions"><a href="#" class="feed-section__more">More Opinions →</a></div>
+          </div>
+        </section>
+
+        <!-- ── Billboard ad between sections ── -->
+        <div class="feed-ad feed-ad--between">
+          <div class="feed-ad__label">Advertisement</div>
+          <div class="feed-ad__box feed-ad__box--billboard">
+            <div class="feed-ad__placeholder">970 × 250 Billboard · <a href="#">Advertise with The Folly</a><div class="feed-ad__size">IAB Standard Billboard</div></div>
+          </div>
+        </div>
+
+        <!-- ═══ POLICE & FIRE ══════════════════════════ -->
         <section class="feed-section" id="section-police-fire">
           <div class="feed-section__header">
             <h2 class="feed-section__title">Police &amp; Fire</h2>
             <div class="feed-section__line"></div>
           </div>
-          <div class="feed-underwriting">
-            <span class="feed-underwriting__label">Underwritten by</span>
-            <span class="feed-underwriting__sponsor">Your Business Name</span>
-            · <a href="#">Become an underwriter</a>
+          <div class="feed-section__topbar">
+            <div class="feed-underwriting">
+              <span class="feed-underwriting__label">Underwritten by</span>
+              <span class="feed-underwriting__sponsor">Your Business Name</span>
+              · <a href="#">Become an underwriter</a>
+            </div>
+            <div class="feed-ad">
+              <div class="feed-ad__label">Ad</div>
+              <div class="feed-ad__box feed-ad__box--mrec">
+                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+              </div>
+            </div>
           </div>
 
           <article class="feed-card">
@@ -967,144 +1354,72 @@
             </div>
           </article>
 
+          <!-- Sponsored content card -->
+          <article class="feed-card feed-card--sponsored">
+            <span class="feed-card__sponsored-label">Sponsored</span>
+            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
+            <div class="feed-card__body">
+              <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
+              <p class="feed-card__excerpt">Advertiser preview text goes here. Reach Seward's public safety-minded readers.</p>
+              <a href="#" class="feed-card__cta">Learn More →</a>
+            </div>
+          </article>
+
           <div class="feed-section__footer">
             <div class="feed-section__actions"><a href="#" class="feed-section__more">More Police &amp; Fire →</a></div>
           </div>
         </section>
 
-        <!-- ── Ad between sections ── -->
+        <!-- ── Billboard ad between sections ── -->
         <div class="feed-ad feed-ad--between">
           <div class="feed-ad__label">Advertisement</div>
-          <div class="feed-ad__box">
-            <div class="feed-ad__placeholder">728 × 90 · <a href="#">Advertise with The Folly</a></div>
+          <div class="feed-ad__box feed-ad__box--billboard">
+            <div class="feed-ad__placeholder">970 × 250 Billboard · <a href="#">Advertise with The Folly</a><div class="feed-ad__size">IAB Standard Billboard</div></div>
           </div>
         </div>
 
-        <!-- ═══ BUSINESS ═════════════════════════════ -->
-        <section class="feed-section" id="section-business">
+        <!-- ═══ SPORTS ═════════════════════════════════ -->
+        <section class="feed-section" id="section-sports">
           <div class="feed-section__header">
-            <h2 class="feed-section__title">Business</h2>
+            <h2 class="feed-section__title">Sports</h2>
             <div class="feed-section__line"></div>
           </div>
-          <div class="feed-underwriting">
-            <span class="feed-underwriting__label">Underwritten by</span>
-            <span class="feed-underwriting__sponsor">Your Business Name</span>
-            · <a href="#">Become an underwriter</a>
+          <div class="feed-section__topbar">
+            <div class="feed-underwriting">
+              <span class="feed-underwriting__label">Underwritten by</span>
+              <span class="feed-underwriting__sponsor">Your Business Name</span>
+              · <a href="#">Become an underwriter</a>
+            </div>
+            <div class="feed-ad">
+              <div class="feed-ad__label">Ad</div>
+              <div class="feed-ad__box feed-ad__box--mrec">
+                <div class="feed-ad__placeholder">300 × 250<br><a href="#">Advertise</a></div>
+              </div>
+            </div>
           </div>
 
           <article class="feed-card">
-            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#3a2a4a,#6a4a8a);"></div></a>
+            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#4a3520,#8b6340);"></div></a>
             <div class="feed-card__body">
-              <h2 class="feed-card__headline"><a href="#">New waterfront restaurant set to open Memorial Day weekend</a></h2>
-              <p class="feed-card__excerpt">A Seward couple is bringing a farm-to-table concept to the small boat harbor, aiming to open in time for the summer tourist season.</p>
-              <div class="feed-card__meta">By Staff · March 15, 2026</div>
+              <h2 class="feed-card__headline"><a href="#">Seward Cheer Squad shines at State, takes top honors</a></h2>
+              <p class="feed-card__excerpt">The Seahawks cheer team brought home gold from this year's statewide competition, earning top marks in all three judged categories.</p>
+              <div class="feed-card__meta">By Staff · March 19, 2026</div>
+            </div>
+          </article>
+
+          <!-- Sponsored content card -->
+          <article class="feed-card feed-card--sponsored">
+            <span class="feed-card__sponsored-label">Sponsored</span>
+            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,var(--glacier-light),#b8d8e0);"></div></a>
+            <div class="feed-card__body">
+              <h2 class="feed-card__headline"><a href="#">Your Ad Headline Here</a></h2>
+              <p class="feed-card__excerpt">Advertiser preview text goes here. Reach Seward's sports fans with a native ad placement.</p>
+              <a href="#" class="feed-card__cta">Learn More →</a>
             </div>
           </article>
 
           <div class="feed-section__footer">
-            <div class="feed-section__actions"><a href="#" class="feed-section__more">More Business →</a></div>
-          </div>
-        </section>
-
-        <!-- ── Ad between sections ── -->
-        <div class="feed-ad feed-ad--between">
-          <div class="feed-ad__label">Advertisement</div>
-          <div class="feed-ad__box">
-            <div class="feed-ad__placeholder">728 × 90 · <a href="#">Advertise with The Folly</a></div>
-          </div>
-        </div>
-
-        <!-- ═══ OPINIONS ═════════════════════════════ -->
-        <section class="feed-section" id="section-opinions">
-          <div class="feed-section__header">
-            <h2 class="feed-section__title">Opinions</h2>
-            <div class="feed-section__line"></div>
-          </div>
-          <div class="feed-underwriting">
-            <span class="feed-underwriting__label">Underwritten by</span>
-            <span class="feed-underwriting__sponsor">Your Business Name</span>
-            · <a href="#">Become an underwriter</a>
-          </div>
-
-          <article class="feed-card">
-            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#3d2e1e,#8c6030);"></div></a>
-            <div class="feed-card__body">
-              <h2 class="feed-card__headline"><a href="#">Commentary: Reflections on digital minimalism and modern life</a></h2>
-              <p class="feed-card__excerpt">A Seward resident explores what it means to step back from constant connectivity in an increasingly digital world.</p>
-              <div class="feed-card__meta">By Guest Contributor · March 19, 2026</div>
-            </div>
-          </article>
-
-          <div class="feed-section__footer">
-            <div class="feed-section__actions"><a href="#" class="feed-section__more">More Opinions →</a></div>
-          </div>
-        </section>
-
-        <!-- ── Ad between sections ── -->
-        <div class="feed-ad feed-ad--between">
-          <div class="feed-ad__label">Advertisement</div>
-          <div class="feed-ad__box">
-            <div class="feed-ad__placeholder">728 × 90 · <a href="#">Advertise with The Folly</a></div>
-          </div>
-        </div>
-
-        <!-- ═══ HEALTH ═══════════════════════════════ -->
-        <section class="feed-section" id="section-health">
-          <div class="feed-section__header">
-            <h2 class="feed-section__title">Health</h2>
-            <div class="feed-section__line"></div>
-          </div>
-          <div class="feed-underwriting">
-            <span class="feed-underwriting__label">Underwritten by</span>
-            <span class="feed-underwriting__sponsor">Your Business Name</span>
-            · <a href="#">Become an underwriter</a>
-          </div>
-
-          <article class="feed-card">
-            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#1e3a4a,#2e6a7a);"></div></a>
-            <div class="feed-card__body">
-              <h2 class="feed-card__headline"><a href="#">Providence Seward announces expanded urgent care hours for spring</a></h2>
-              <p class="feed-card__excerpt">Starting April 1, Providence Seward Medical Center will extend urgent care availability to meet growing patient demand heading into tourist season.</p>
-              <div class="feed-card__meta">By Staff · March 17, 2026</div>
-            </div>
-          </article>
-
-          <div class="feed-section__footer">
-            <div class="feed-section__actions"><a href="#" class="feed-section__more">More Health →</a></div>
-          </div>
-        </section>
-
-        <!-- ── Ad between sections ── -->
-        <div class="feed-ad feed-ad--between">
-          <div class="feed-ad__label">Advertisement</div>
-          <div class="feed-ad__box">
-            <div class="feed-ad__placeholder">728 × 90 · <a href="#">Advertise with The Folly</a></div>
-          </div>
-        </div>
-
-        <!-- ═══ HOUSING ══════════════════════════════ -->
-        <section class="feed-section" id="section-housing">
-          <div class="feed-section__header">
-            <h2 class="feed-section__title">Housing</h2>
-            <div class="feed-section__line"></div>
-          </div>
-          <div class="feed-underwriting">
-            <span class="feed-underwriting__label">Underwritten by</span>
-            <span class="feed-underwriting__sponsor">Your Business Name</span>
-            · <a href="#">Become an underwriter</a>
-          </div>
-
-          <article class="feed-card">
-            <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#2a3a2a,#4a6a3a);"></div></a>
-            <div class="feed-card__body">
-              <h2 class="feed-card__headline"><a href="#">City council approves rezoning request for new workforce housing development</a></h2>
-              <p class="feed-card__excerpt">The 32-unit project on Dimond Boulevard cleared its final regulatory hurdle Tuesday, with construction expected to begin this summer.</p>
-              <div class="feed-card__meta">By Staff · March 15, 2026</div>
-            </div>
-          </article>
-
-          <div class="feed-section__footer">
-            <div class="feed-section__actions"><a href="#" class="feed-section__more">More Housing →</a></div>
+            <div class="feed-section__actions"><a href="#" class="feed-section__more">More Sports →</a></div>
           </div>
         </section>
 
