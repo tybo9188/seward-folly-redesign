@@ -1,0 +1,8 @@
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.container--wide { max-width: 1440px; }
+
+.bg-slate { background: linear-gradient(135deg, #466168, #2c4a52); }
+.bg-sage { background: linear-gradient(135deg, #90a27b, #6b8a5e); }
+.bg-terracotta { background: linear-gradient(135deg, #e3ad7d, #c48a5a); }
+.bg-ink { background: linear-gradient(135deg, #253446, #1a2636); }
+.bg-ink-soft { background: linear-gradient(135deg, #4a5568, #2d3748); }

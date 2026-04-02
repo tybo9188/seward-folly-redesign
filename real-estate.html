@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Homes for sale in Seward right now – The Seward Folly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & base ────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:      #253446;
+      --ink-soft: #4a5568;
+      --slate:    #466168;
+      --sage:     #90a27b;
+      --sage-light: #dfe8d6;
+      --terracotta: #e3ad7d;
+      --terracotta-light: #f5e6d4;
+      --cream:    #F7F6F1;
+      --warm-white: #fdfcf8;
+      --sand:     #e8dcc8;
+      --divider:  #d8d0c4;
+      --serif:    'Playfair Display', Georgia, serif;
+      --sans:     'Source Sans 3', system-ui, sans-serif;
+      --header-h: 64px;
+    }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--warm-white);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Utility ────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Masthead (sticky, full-width, centered logo) ── */
+    .masthead {
+      background: var(--warm-white);
+      border-bottom: 3px solid var(--ink);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--header-h);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 24px;
+    }
+    .masthead__spacer { display: block; }
+    .masthead__logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-self: center;
+    }
+    .masthead__mountain {
+      width: 44px;
+      height: 34px;
+      flex-shrink: 0;
+    }
+    .masthead__title {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: -.01em;
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    /* ── Buttons ────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border-radius: 3px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .2s;
+      border: 2px solid transparent;
+      text-decoration: none !important;
+      white-space: nowrap;
+    }
+    .btn--subscribe {
+      background: var(--slate);
+      color: #fff;
+      border-color: var(--slate);
+    }
+    .btn--subscribe:hover { background: #354f56; border-color: #354f56; }
+
+    /* ── Masthead right controls ───────────────────── */
+    .masthead__right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-self: end;
+    }
+
+    /* ── Hamburger button ──────────────────────────── */
+    .hamburger {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .hamburger__lines {
+      width: 22px;
+      height: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .hamburger__line {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--ink);
+      border-radius: 1px;
+    }
+
+    /* ── Slide-out menu ────────────────────────────── */
+    .menu-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.3);
+      z-index: 150;
+    }
+    .menu-overlay--open { display: block; }
+    .slide-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 340px;
+      max-width: 85vw;
+      height: 100vh;
+      background: var(--warm-white);
+      z-index: 160;
+      transform: translateX(100%);
+      transition: transform .3s ease;
+      overflow-y: auto;
+      padding: 0 0 32px;
+      box-shadow: -4px 0 24px rgba(0,0,0,.1);
+    }
+    .slide-menu--open { transform: translateX(0); }
+    .slide-menu__close {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--divider);
+    }
+    .slide-menu__close-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 1;
+      border-radius: 4px;
+      transition: background .15s;
+    }
+    .slide-menu__close-btn:hover { background: var(--cream); }
+    .slide-menu__section { border-bottom: 1px solid var(--divider); }
+    .slide-menu__heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      transition: background .15s;
+    }
+    .slide-menu__heading:hover { background: var(--cream); }
+    .slide-menu__arrow {
+      font-size: 10px;
+      transition: transform .25s;
+      color: var(--ink-soft);
+    }
+    .slide-menu__heading--open .slide-menu__arrow { transform: rotate(180deg); }
+    .slide-menu__links {
+      display: none;
+      list-style: none;
+      padding: 0 24px 16px;
+    }
+    .slide-menu__links--open {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .slide-menu__links a {
+      display: block;
+      padding: 9px 16px;
+      font-size: 14px;
+      color: var(--ink-soft);
+      transition: color .15s, background .15s;
+      border-radius: 4px;
+    }
+    .slide-menu__links a:hover {
+      color: var(--ink);
+      background: var(--cream);
+      text-decoration: none;
+    }
+    .slide-menu__contact {
+      padding: 20px 24px;
+      font-size: 12px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+    .slide-menu__contact a {
+      color: var(--slate);
+      font-weight: 600;
+    }
+
+    /* Desktop: hide mobile-only subscribe in menu */
+    .slide-menu__subscribe-mobile { display: none; }
+
+    /* ── Underwriting ──────────────────────────────── */
+    .article-underwriting {
+      background: var(--sage-light);
+      border-radius: 4px;
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 24px;
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+    .article-underwriting__label {
+      font-weight: 400;
+      opacity: .7;
+    }
+    .article-underwriting__sponsor {
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .article-underwriting a { color: var(--slate); font-weight: 700; }
+    .article-underwriting a:hover { text-decoration: underline; }
+
+    /* ── Article layout ────────────────────────────── */
+    .article-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      column-gap: 48px;
+      padding-top: 40px;
+      padding-bottom: 60px;
+    }
+    .article-main-col { grid-column: 1; }
+    .sidebar-ad-zone  { grid-column: 2; }
+
+    /* ── Article header ────────────────────────────── */
+    .article-header {
+      margin-bottom: 32px;
+    }
+    .article-category {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 12px;
+      padding-bottom: 0;
+    }
+    .article-category a {
+      color: var(--slate);
+      text-decoration: none;
+    }
+    .article-category a:hover {
+      text-decoration: underline;
+    }
+    .article-headline {
+      font-family: var(--sans);
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 16px;
+      letter-spacing: -.01em;
+    }
+    .article-excerpt {
+      font-size: 20px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+      margin-bottom: 20px;
+    }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 14px;
+      color: var(--ink-soft);
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--divider);
+    }
+    .article-meta__author {
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .article-meta__sep {
+      color: var(--divider);
+    }
+
+    /* ── Featured image ────────────────────────────── */
+    .article-featured-img {
+      margin-bottom: 32px;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .article-featured-img__placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #3a6073 0%, #16222a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .article-featured-img figcaption {
+      font-size: 13px;
+      color: var(--ink-soft);
+      padding: 10px 0;
+      font-style: italic;
+    }
+
+    /* ── Article body ──────────────────────────────── */
+    .article-body {
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--ink);
+    }
+    .article-body p {
+      margin-bottom: 24px;
+    }
+    .article-body strong {
+      font-weight: 700;
+    }
+    .article-body a {
+      color: var(--slate);
+      text-decoration: underline;
+      text-decoration-color: var(--sage-light);
+      text-underline-offset: 2px;
+      transition: text-decoration-color .2s;
+    }
+    .article-body a:hover {
+      text-decoration-color: var(--slate);
+    }
+
+    /* ── CTA banner ───────────────────────────────── */
+    .re-cta-banner {
+      background: var(--cream);
+      border-radius: 6px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .re-cta-banner p {
+      font-size: 14px;
+      font-style: italic;
+      color: var(--ink-soft);
+      margin-bottom: 0;
+    }
+    .re-cta-banner .btn--cta {
+      font-size: 11px;
+      font-family: var(--sans);
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 9px 18px;
+      border-radius: 3px;
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .2s;
+      text-decoration: none !important;
+    }
+    .re-cta-banner .btn--cta:hover { background: #354f56; }
+
+    /* ── Listing cards ─────────────────────────────── */
+    .re-section-heading {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--ink-soft);
+      margin: 36px 0 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--divider);
+    }
+    .re-section-heading:first-of-type { margin-top: 0; }
+
+    .listing-card {
+      border: 1px solid var(--divider);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      background: var(--warm-white);
+    }
+    .listing-card__img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, #3a6073 0%, #16222a 100%);
+    }
+    .listing-card__body {
+      padding: 24px;
+    }
+    .listing-card__address {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+    .listing-card__city {
+      font-size: 13px;
+      color: var(--ink-soft);
+      margin-bottom: 16px;
+    }
+
+    /* Stats grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      border: 1px solid var(--divider);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .stat-cell {
+      padding: 10px 8px;
+      text-align: center;
+      border-right: 1px solid var(--divider);
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-cell--highlight { background: var(--cream); }
+    .stat-cell__val {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .stat-cell__lbl {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--ink-soft);
+      margin-top: 2px;
+    }
+
+    /* Listing facts */
+    .listing-card__facts {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+    .listing-card__facts li {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 2px;
+    }
+    .listing-card__facts li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--divider);
+    }
+
+    /* Listing footer */
+    .listing-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--cream);
+    }
+    .listing-card__agent {
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+    .listing-card__agent strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .listing-card__view {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 4px;
+      border: 1px solid var(--divider);
+      background: none;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all .15s;
+      text-decoration: none !important;
+      white-space: nowrap;
+    }
+    .listing-card__view:hover {
+      background: var(--cream);
+      border-color: var(--sand);
+    }
+
+    /* ── Empty section note ─────────────────────────── */
+    .re-empty {
+      font-size: 14px;
+      color: var(--ink-soft);
+      font-style: italic;
+      margin-bottom: 32px;
+    }
+
+    /* ── CTA form ──────────────────────────────────── */
+    .re-cta-form {
+      border: 1px solid var(--divider);
+      border-radius: 6px;
+      padding: 28px;
+      margin-top: 8px;
+    }
+    .re-cta-form__heading {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .re-cta-form__sub {
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+    .re-form-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .re-form-row input { flex: 1; }
+    .re-input,
+    .re-select,
+    .re-textarea {
+      font-family: var(--sans);
+      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 4px;
+      border: 1px solid var(--divider);
+      background: #fff;
+      color: var(--ink);
+      width: 100%;
+      margin-bottom: 10px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .re-input:focus,
+    .re-select:focus,
+    .re-textarea:focus { border-color: var(--slate); }
+    .re-textarea { resize: vertical; min-height: 90px; }
+    .re-submit {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      border-radius: 4px;
+      background: var(--slate);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background .2s;
+      margin-top: 4px;
+    }
+    .re-submit:hover { background: #354f56; }
+    .re-success {
+      display: none;
+      font-size: 14px;
+      color: var(--sage);
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    /* ── Share bar ──────────────────────────────────── */
+    .share-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 24px 0;
+      margin-top: 8px;
+    }
+    .share-bar__label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-right: 8px;
+    }
+    .share-bar__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      border: 1px solid var(--divider);
+      border-radius: 4px;
+      background: none;
+      cursor: pointer;
+      transition: all .15s;
+      text-decoration: none !important;
+    }
+    .share-bar__btn:hover {
+      background: var(--cream);
+      color: var(--ink);
+      border-color: var(--sand);
+    }
+    .share-bar__btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ── Comments ───────────────────────────────────── */
+    .comments {
+      padding-top: 8px;
+    }
+    .comments__toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font-family: var(--sans);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0;
+    }
+    .comments__toggle:hover { color: var(--slate); }
+    .comments__chevron {
+      font-size: 14px;
+      transition: transform .25s;
+      color: var(--ink-soft);
+    }
+    .comments--expanded .comments__chevron { transform: rotate(180deg); }
+    .comments__body {
+      display: none;
+      padding-top: 24px;
+    }
+    .comments--expanded .comments__body {
+      display: block;
+    }
+    .comment {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--cream);
+    }
+    .comment:last-of-type {
+      border-bottom: none;
+    }
+    .comment__header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .comment__avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--sage-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--slate);
+      flex-shrink: 0;
+    }
+    .comment__author {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--ink);
+    }
+    .comment__date {
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+    .comment__body {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      padding-left: 46px;
+    }
+    .comment__reply {
+      display: inline-block;
+      margin-top: 6px;
+      margin-left: 46px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--slate);
+      text-decoration: none !important;
+      transition: color .15s;
+    }
+    .comment__reply:hover {
+      color: var(--ink);
+    }
+
+    /* Comment form */
+    .comment-form {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--cream);
+    }
+    .comment-form__heading {
+      font-family: var(--sans);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+    .comment-form__textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 14px 16px;
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.6;
+      border: 1px solid var(--divider);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      resize: vertical;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .comment-form__textarea:focus {
+      border-color: var(--slate);
+    }
+    .comment-form__submit {
+      margin-top: 12px;
+      padding: 10px 24px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      background: var(--slate);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .comment-form__submit:hover {
+      background: #354f56;
+    }
+
+    /* ── Sidebar ad ─────────────────────────────────── */
+    .sidebar-ad-zone {
+      padding-top: 0;
+    }
+    .sidebar-ad-sticky {
+      position: sticky;
+      top: calc(var(--header-h) + 24px);
+    }
+    .sidebar-ad__label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      opacity: .45;
+      margin-bottom: 6px;
+    }
+    .sidebar-ad__box {
+      width: 300px;
+      height: 300px;
+      background: var(--cream);
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--ink-soft);
+      text-align: center;
+      line-height: 1.5;
+    }
+    .sidebar-ad__box a {
+      color: var(--slate);
+      font-weight: 600;
+    }
+
+    /* ── More from [category] (main column) ────────── */
+    .more-stories {
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--divider);
+    }
+    .more-stories__heading {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .more-stories__list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .more-stories__card {
+      display: flex;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--cream);
+      text-decoration: none !important;
+    }
+    .more-stories__card:first-child { padding-top: 0; }
+    .more-stories__card:last-child { border-bottom: none; }
+    .more-stories__img {
+      width: 160px;
+      height: 110px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      object-fit: cover;
+    }
+    .more-stories__img-placeholder {
+      width: 160px;
+      height: 110px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+    .more-stories__text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+    }
+    .more-stories__category {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 6px;
+    }
+    .more-stories__title {
+      font-family: var(--sans);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.35;
+      margin-bottom: 6px;
+      transition: color .15s;
+    }
+    .more-stories__card:hover .more-stories__title {
+      color: var(--slate);
+    }
+    .more-stories__meta {
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+
+    /* ── Inline ad (mobile only) ─────────────────── */
+    .article-inline-ad {
+      display: none;
+    }
+    .article-inline-ad__label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      opacity: .45;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+    .article-inline-ad__box {
+      width: 300px;
+      height: 250px;
+      background: var(--cream);
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--ink-soft);
+      text-align: center;
+      line-height: 1.5;
+      margin: 0 auto;
+    }
+    .article-inline-ad__box a {
+      color: var(--slate);
+      font-weight: 600;
+    }
+
+    /* ── Newsletter banner ──────────────────────── */
+    .newsletter {
+      background: var(--slate);
+      color: #fff;
+      padding: 44px 0;
+    }
+    .newsletter__inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 32px;
+    }
+    .newsletter__kicker {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.75);
+      margin-bottom: 6px;
+    }
+    .newsletter__heading {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .newsletter__sub { font-size: 14px; opacity: .8; }
+    .newsletter__form { display: flex; gap: 0; }
+    .newsletter__input {
+      padding: 12px 16px;
+      font-size: 14px;
+      border: none;
+      border-radius: 3px 0 0 3px;
+      width: 260px;
+      background: rgba(255,255,255,.2);
+      color: #fff;
+      outline: none;
+    }
+    .newsletter__input::placeholder { color: rgba(255,255,255,.55); }
+    .newsletter__input:focus { background: rgba(255,255,255,.28); }
+    .newsletter__submit {
+      padding: 12px 20px;
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      border-radius: 0 3px 3px 0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .newsletter__submit:hover { background: #1a2a35; }
+
+    /* ── Footer ─────────────────────────────────── */
+    .footer {
+      background: var(--ink);
+      color: rgba(255,255,255,.7);
+      font-size: 13px;
+      padding: 48px 0 24px;
+    }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1.2fr 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+    .footer__brand-title {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    .footer__mission {
+      font-size: 13px;
+      line-height: 1.7;
+      opacity: .75;
+    }
+    .footer__social {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .footer__social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.7);
+      transition: all .2s;
+    }
+    .footer__social a:hover {
+      background: rgba(255,255,255,.1);
+      color: #fff;
+      text-decoration: none;
+    }
+    .footer__col-heading {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .footer__links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer__links a {
+      color: rgba(255,255,255,.65);
+      font-size: 13px;
+      transition: color .2s;
+    }
+    .footer__links a:hover { color: #fff; text-decoration: none; }
+    .footer__contact {
+      margin-top: 20px;
+      font-size: 12px;
+      opacity: .55;
+      line-height: 1.7;
+    }
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      opacity: .5;
+    }
+
+    /* ── Responsive ─────────────────────────────── */
+    @media (max-width: 960px) {
+      .article-layout {
+        grid-template-columns: 1fr;
+      }
+      .sidebar-ad-zone {
+        display: none;
+      }
+      .footer__grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      /* Header: left-align logo, hide subscribe */
+      .masthead { grid-template-columns: 1fr auto; }
+      .masthead__spacer { display: none; }
+      .masthead__logo-wrap { justify-self: start; }
+      .masthead__title { font-size: 24px; }
+      .masthead__mountain { width: 36px; height: 28px; }
+      .masthead__subscribe-desktop { display: none; }
+      .slide-menu__subscribe-mobile { display: block; }
+
+      /* Article header */
+      .article-layout { padding-top: 24px; padding-bottom: 40px; }
+      .article-headline { font-size: 32px; }
+
+      /* Mobile inline ad */
+      .article-inline-ad {
+        display: block;
+        padding: 24px 0;
+      }
+      .article-excerpt { font-size: 17px; }
+
+      /* Underwriting: inline, full-width */
+      .article-underwriting {
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        font-size: 11px;
+        padding: 8px 12px;
+        border-radius: 0;
+        margin-left: -24px;
+        margin-right: -24px;
+      }
+
+      /* Featured image: full-bleed */
+      .article-featured-img {
+        border-radius: 0;
+        margin-left: -24px;
+        margin-right: -24px;
+      }
+
+      /* Listing cards: full-bleed images */
+      .listing-card {
+        margin-left: -24px;
+        margin-right: -24px;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+      }
+
+      /* Stats grid: scroll on small screens */
+      .stats-grid {
+        grid-template-columns: repeat(6, minmax(70px, 1fr));
+        overflow-x: auto;
+      }
+
+      /* Body adjustments */
+      .article-body { font-size: 17px; }
+
+      /* Share bar: allow wrapping */
+      .share-bar { flex-wrap: wrap; }
+      .share-bar__btn { padding: 6px 10px; font-size: 11px; }
+
+      /* More stories: smaller thumbnails */
+      .more-stories__img,
+      .more-stories__img-placeholder { width: 120px; height: 85px; }
+      .more-stories__title { font-size: 16px; }
+
+      /* Comments: reduce left indent */
+      .comment__body { padding-left: 0; margin-top: 8px; }
+      .comment__reply { margin-left: 0; }
+
+      /* CTA banner wrap */
+      .re-cta-banner { flex-direction: column; text-align: center; }
+
+      /* Form row stack */
+      .re-form-row { flex-direction: column; }
+
+      /* Newsletter */
+      .newsletter__inner { grid-template-columns: 1fr; gap: 20px; text-align: center; }
+      .newsletter__form { justify-content: center; }
+      .newsletter__input { width: 220px; }
+
+      .footer__grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .masthead__title { font-size: 20px; }
+      .masthead__mountain { width: 32px; height: 25px; }
+      .article-headline { font-size: 28px; }
+      .article-excerpt { font-size: 16px; }
+      .stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .listing-card__footer { flex-direction: column; align-items: flex-start; }
+      .footer__grid { grid-template-columns: 1fr; }
+      .footer__bottom { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── MASTHEAD (sticky, minimal) ─────────────────── -->
+<header class="masthead">
+  <div class="masthead__spacer"></div>
+  <a href="index.html" class="masthead__logo-wrap" style="text-decoration:none;">
+    <svg class="masthead__mountain" viewBox="0 0 80 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M40 4L14 46H66L40 4Z" fill="#253446"/>
+      <path d="M55 18L36 46H74L55 18Z" fill="#466168"/>
+      <path d="M22 28L6 54H38L22 28Z" fill="#90a27b" opacity=".8"/>
+      <path d="M4 54H76" stroke="#253446" stroke-width="3" stroke-linecap="round"/>
+      <path d="M37 4L40 4L43 4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <h1 class="masthead__title">The Seward Folly</h1>
+  </a>
+  <div class="masthead__right">
+    <a href="#" class="btn btn--subscribe masthead__subscribe-desktop">Subscribe</a>
+    <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+      <span class="hamburger__lines">
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
+      </span>
+    </button>
+  </div>
+</header>
+
+<!-- ── SLIDE-OUT MENU ────────────────────────────── -->
+<div class="menu-overlay" id="menu-overlay"></div>
+<nav class="slide-menu" id="slide-menu" aria-label="Main navigation">
+  <div class="slide-menu__close">
+    <button class="slide-menu__close-btn" id="menu-close-btn" aria-label="Close menu">✕</button>
+  </div>
+  <div class="slide-menu__subscribe-mobile" style="padding:16px 24px; border-bottom:1px solid var(--divider);">
+    <a href="#" class="btn btn--subscribe" style="width:100%; justify-content:center;">Subscribe</a>
+  </div>
+  <div class="slide-menu__section">
+    <button class="slide-menu__heading" data-menu-toggle="menu-news">
+      News <span class="slide-menu__arrow">▾</span>
+    </button>
+    <ul class="slide-menu__links" id="menu-news">
+      <li><a href="#">Arts &amp; Entertainment</a></li>
+      <li><a href="#">Business</a></li>
+      <li><a href="#">Community</a></li>
+      <li><a href="#">Education</a></li>
+      <li><a href="#">Government</a></li>
+      <li><a href="#">Health</a></li>
+      <li><a href="#">Housing</a></li>
+      <li><a href="#">Obituaries</a></li>
+      <li><a href="#">Opinions</a></li>
+      <li><a href="#">Police &amp; Fire</a></li>
+      <li><a href="#">Sports</a></li>
+    </ul>
+  </div>
+  <div class="slide-menu__section">
+    <button class="slide-menu__heading" data-menu-toggle="menu-resources">
+      Resources <span class="slide-menu__arrow">▾</span>
+    </button>
+    <ul class="slide-menu__links" id="menu-resources">
+      <li><a href="#">Business Directory</a></li>
+      <li><a href="#">Business Login</a></li>
+      <li><a href="#">Calendar</a></li>
+      <li><a href="#">Links</a></li>
+      <li><a href="#">Public Notices</a></li>
+    </ul>
+  </div>
+  <div class="slide-menu__section">
+    <button class="slide-menu__heading" data-menu-toggle="menu-about">
+      About <span class="slide-menu__arrow">▾</span>
+    </button>
+    <ul class="slide-menu__links" id="menu-about">
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Advertise</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Donate</a></li>
+      <li><a href="#">Sponsors</a></li>
+      <li><a href="#">Submit a Story</a></li>
+    </ul>
+  </div>
+  <div class="slide-menu__contact">
+    P.O. Box 1983 · Seward, AK 99664<br>
+    <a href="mailto:sewardsfolly25@gmail.com">sewardsfolly25@gmail.com</a>
+  </div>
+</nav>
+
+<!-- ── MAIN CONTENT ──────────────────────────────── -->
+<main>
+  <div class="container">
+    <div class="article-layout">
+
+      <!-- ── Main column ──────────────────────── -->
+      <div class="article-main-col">
+
+        <!-- Header -->
+        <header class="article-header">
+          <div class="article-category"><a href="#">Housing</a></div>
+          <h1 class="article-headline">Homes for sale in Seward right now</h1>
+          <p class="article-excerpt">There are currently 17 properties listed for sale in Seward. Here are the active listings, what they cost, and what to know before you buy.</p>
+          <div class="article-meta">
+            <span class="article-meta__author">By The Seward Folly Staff</span>
+            <span class="article-meta__sep">·</span>
+            <time datetime="2026-03-26">March 26, 2026</time>
+          </div>
+        </header>
+
+        <!-- Underwriting -->
+        <div class="article-underwriting">
+          <span class="article-underwriting__label">Underwritten by</span>
+          <span class="article-underwriting__sponsor">Your Business Name</span>
+          · <a href="#">Become an underwriter</a>
+        </div>
+
+        <!-- Featured image -->
+        <figure class="article-featured-img">
+          <div class="article-featured-img__placeholder" style="background:linear-gradient(135deg, #2c5364 0%, #203a43 50%, #0f2027 100%)"></div>
+          <figcaption>Seward, Alaska — Photo by The Seward Folly</figcaption>
+        </figure>
+
+        <!-- Body -->
+        <div class="article-body">
+
+          <p>There are currently <strong>17 properties</strong> listed for sale in Seward — 8 single-family homes, 6 multi-family properties, and 3 land parcels. The average asking price is <strong>$354,764</strong>, up about 2% from a year ago. Inventory remains limited.</p>
+
+          <p>Below are selected active listings. Prices, details, and availability are current as of publication but may change. Contact the listing agent for the latest information.</p>
+
+          <p>If you're thinking about buying or selling in Seward, scroll to the bottom of this page to tell us what you're looking for. We're exploring how The Folly can be helpful to buyers and sellers.</p>
+
+          <!-- Mobile inline ad (after 3rd paragraph) -->
+          <div class="article-inline-ad">
+            <div class="article-inline-ad__label">Advertisement</div>
+            <div class="article-inline-ad__box">300 × 250<br><a href="#">Advertise with<br>The Folly</a></div>
+          </div>
+
+          <!-- CTA banner -->
+          <div class="re-cta-banner">
+            <p>Thinking about buying or selling in Seward? Tell us what you're looking for.</p>
+            <a href="#cta-form" class="btn--cta">Get in touch ↓</a>
+          </div>
+
+          <!-- ── Single-family homes ──────────────── -->
+          <h2 class="re-section-heading" id="single-family">Single-family homes</h2>
+
+          <div class="listing-card">
+            <div class="listing-card__img" style="background:linear-gradient(135deg, #355c3a 0%, #1a3a1d 100%)"></div>
+            <div class="listing-card__body">
+              <div class="listing-card__address">10411 Bearpaw Dr</div>
+              <div class="listing-card__city">Seward, AK 99664</div>
+              <div class="stats-grid">
+                <div class="stat-cell stat-cell--highlight"><div class="stat-cell__val">$1,400,000</div><div class="stat-cell__lbl">List price</div></div>
+                <div class="stat-cell stat-cell--highlight"><div class="stat-cell__val">~$8,032/mo</div><div class="stat-cell__lbl">Est. payment</div></div>
+                <div class="stat-cell"><div class="stat-cell__val">4</div><div class="stat-cell__lbl">Beds</div></div>
+                <div class="stat-cell"><div class="stat-cell__val">5</div><div class="stat-cell__lbl">Baths</div></div>
+                <div class="stat-cell"><div class="stat-cell__val">3,320</div><div class="stat-cell__lbl">Sq ft</div></div>
+                <div class="stat-cell"><div class="stat-cell__val">0.94</div><div class="stat-cell__lbl">Acres</div></div>
+              </div>
+              <ul class="listing-card__facts">
+                <li>Hand-built log home on just under 1 acre</li>
+                <li>Main house: 3 bedrooms + flex room, 2 full baths, covered hot tub deck, 2-car garage</li>
+                <li>Separate duplex with 2 rental units; additional storage shed</li>
+              </ul>
+              <div class="listing-card__footer">
+                <div class="listing-card__agent">Listed by <strong>Ristine Casagranda</strong> · Coastal Heritage Properties</div>
+                <a href="#" class="listing-card__view">View listing →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Multi-family ─────────────────────── -->
+          <h2 class="re-section-heading" id="multi-family">Multi-family</h2>
+
+          <div class="listing-card">
+            <div class="listing-card__img" style="background:linear-gradient(135deg, #3a4f6f 0%, #1e2d45 100%)"></div>
+            <div class="listing-card__body">
+              <div class="listing-card__address">1105 Second Ave</div>
+              <div class="listing-card__city">Seward, AK 99664</div>
+              <div class="stats-grid">
+                <div class="stat-cell stat-cell--highlight"><div class="stat-cell__val">$630,000</div><div class="stat-cell__lbl">List price</div></div>
+                <div class="stat-cell stat-cell--highlight"><div class="stat-cell__val">~$3,635/mo</div><div class="stat-cell__lbl">Est. payment</div></div>
+                <div class="stat-cell"><div class="stat-cell__val">5</div><div class="stat-cell__lbl">Beds</div></div>
+                <div class="stat-cell"><div class="stat-cell__val">3</div><div class="stat-cell__lbl">Baths</div></div>
+                <div class="stat-cell"><div class="stat-cell__val">2,536</div><div class="stat-cell__lbl">Sq ft</div></div>
+                <div class="stat-cell"><div class="stat-cell__val">0.14</div><div class="stat-cell__lbl">Acres</div></div>
+              </div>
+              <ul class="listing-card__facts">
+                <li>Triplex steps from the Seward Boat Harbor and Two Lakes Park</li>
+                <li>Two units occupied by long-term tenants; upper unit vacant and move-in ready</li>
+                <li>Upper unit furnished; eligible for short-term rental</li>
+              </ul>
+              <div class="listing-card__footer">
+                <div class="listing-card__agent">Listed by <strong>Ristine Casagranda</strong> · Coastal Heritage Properties</div>
+                <a href="#" class="listing-card__view">View listing →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Land ─────────────────────────────── -->
+          <h2 class="re-section-heading" id="land">Land</h2>
+          <p class="re-empty">No land parcels in this week's update.</p>
+
+          <!-- ── CTA form ─────────────────────────── -->
+          <div class="re-cta-form" id="cta-form">
+            <h2 class="re-cta-form__heading">Buying or selling in Seward?</h2>
+            <p class="re-cta-form__sub">We're exploring how The Folly can be helpful to buyers and sellers. Please tell us a little about what you're looking for.</p>
+            <div class="re-form-row">
+              <input class="re-input" type="text" placeholder="Name" style="margin-bottom:0">
+              <input class="re-input" type="email" placeholder="Email" style="margin-bottom:0">
+            </div>
+            <select class="re-select">
+              <option value="">I'm looking to…</option>
+              <option>Buy a Seward property</option>
+              <option>Sell a Seward property</option>
+              <option>Both</option>
+              <option>Just browsing</option>
+            </select>
+            <textarea class="re-textarea" placeholder="Anything else you'd like us to know? (budget, timeline, type of property, etc.)"></textarea>
+            <button class="re-submit" type="button" onclick="document.getElementById('re-success').style.display='block';this.style.display='none'">Send →</button>
+            <div class="re-success" id="re-success">Thanks — we'll be in touch soon.</div>
+          </div>
+
+        </div><!-- /article-body -->
+
+        <!-- Share -->
+        <div class="share-bar">
+          <span class="share-bar__label">Share</span>
+          <a href="#" class="share-bar__btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Email
+          </a>
+          <a href="#" class="share-bar__btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            Facebook
+          </a>
+          <a href="#" class="share-bar__btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            Instagram
+          </a>
+          <a href="#" class="share-bar__btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1 0-5.78c.27 0 .54.04.8.1V8.97a6.34 6.34 0 0 0-.8-.05 6.34 6.34 0 0 0 0 12.68 6.34 6.34 0 0 0 6.34-6.34V9.38A8.16 8.16 0 0 0 20.59 11V7.5a5.19 5.19 0 0 1-1-.81z"/></svg>
+            TikTok
+          </a>
+          <a href="#" class="share-bar__btn">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 0C4.478 0 0 4.478 0 10s4.478 10 10 10 10-4.478 10-10S15.522 0 10 0zm5.8 11.2c.04.2.06.42.06.64 0 2.6-3.02 4.72-6.74 4.72s-6.74-2.12-6.74-4.72c0-.22.02-.44.06-.64a1.44 1.44 0 0 1-.58-1.16c0-.8.66-1.46 1.46-1.46.38 0 .72.14.98.38 1.08-.76 2.56-1.24 4.2-1.3l.84-3.82a.3.3 0 0 1 .36-.22l2.72.6a1.06 1.06 0 0 1 2 .48 1.06 1.06 0 0 1-2.02.36l-2.4-.52-.74 3.38c1.6.08 3.04.56 4.1 1.3.26-.24.6-.38.98-.38.8 0 1.46.66 1.46 1.46 0 .48-.24.9-.58 1.16zM7.46 10.8a1.06 1.06 0 1 0 0 2.12 1.06 1.06 0 0 0 0-2.12zm5.08 0a1.06 1.06 0 1 0 0 2.12 1.06 1.06 0 0 0 0-2.12zm-4.8 3.38c.08.08.2.08.28 0 .44-.44 1.12-.64 2.06-.64 .94 0 1.62.2 2.06.64.08.08.2.08.28 0 .08-.08.08-.2 0-.28-.52-.52-1.28-.78-2.34-.78s-1.82.26-2.34.78c-.08.08-.08.2 0 .28z"/></svg>
+            Reddit
+          </a>
+          <a href="#" class="share-bar__btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            X
+          </a>
+          <a href="#" class="share-bar__btn" onclick="window.print(); return false;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Print
+          </a>
+        </div>
+
+        <!-- Comments (collapsed by default) -->
+        <section class="comments" id="comments-section">
+          <button class="comments__toggle" id="comments-toggle">
+            1 Comment <span class="comments__chevron">▾</span>
+          </button>
+          <div class="comments__body">
+            <div class="comment">
+              <div class="comment__header">
+                <div class="comment__avatar">R</div>
+                <div>
+                  <div class="comment__author">Rachel</div>
+                  <div class="comment__date">March 26, 2026</div>
+                </div>
+              </div>
+              <div class="comment__body">This is really helpful — I've been keeping an eye on the Seward market and it's great to have everything in one place. Would love to see this updated weekly!</div>
+              <a href="#" class="comment__reply">Reply</a>
+            </div>
+
+            <div class="comment-form">
+              <h3 class="comment-form__heading">Leave a Reply</h3>
+              <textarea class="comment-form__textarea" placeholder="Write a comment..."></textarea>
+              <button class="comment-form__submit" type="button">Post Comment</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- More from Housing -->
+        <section class="more-stories">
+          <h2 class="more-stories__heading">More from Housing</h2>
+          <div class="more-stories__list">
+            <a href="#" class="more-stories__card">
+              <div class="more-stories__img-placeholder" style="background:linear-gradient(135deg, #2c5364 0%, #203a43 50%, #0f2027 100%)"></div>
+              <div class="more-stories__text">
+                <span class="more-stories__category">Housing</span>
+                <div class="more-stories__title">Seward rental vacancy rate hits new low as summer season approaches</div>
+                <div class="more-stories__meta">March 24, 2026</div>
+              </div>
+            </a>
+            <a href="#" class="more-stories__card">
+              <div class="more-stories__img-placeholder" style="background:linear-gradient(135deg, #1a2980 0%, #26d0ce 100%)"></div>
+              <div class="more-stories__text">
+                <span class="more-stories__category">Housing</span>
+                <div class="more-stories__title">City Council weighs short-term rental regulations for downtown</div>
+                <div class="more-stories__meta">March 20, 2026</div>
+              </div>
+            </a>
+            <a href="#" class="more-stories__card">
+              <div class="more-stories__img-placeholder" style="background:linear-gradient(135deg, #3a6186 0%, #89253e 100%)"></div>
+              <div class="more-stories__text">
+                <span class="more-stories__category">Housing</span>
+                <div class="more-stories__title">New affordable housing project breaks ground on Railway Avenue</div>
+                <div class="more-stories__meta">March 14, 2026</div>
+              </div>
+            </a>
+          </div>
+        </section>
+
+      </div><!-- /article-main-col -->
+
+      <!-- ── Sidebar: Ad ─────────────────────────── -->
+      <div class="sidebar-ad-zone">
+        <div class="sidebar-ad-sticky">
+          <div class="sidebar-ad__label">Advertisement</div>
+          <div class="sidebar-ad__box">300 × 300<br><a href="#">Advertise with<br>The Folly</a></div>
+        </div>
+      </div>
+
+    </div><!-- /article-layout -->
+  </div><!-- /container -->
+
+  <!-- ── NEWSLETTER ─────────────────────────────── -->
+  <div class="newsletter">
+    <div class="container">
+      <div class="newsletter__inner">
+        <div>
+          <div class="newsletter__kicker">Stay informed</div>
+          <h2 class="newsletter__heading">Get Seward's news delivered to your inbox</h2>
+          <p class="newsletter__sub">Free weekly digest · No spam · Unsubscribe anytime</p>
+        </div>
+        <form class="newsletter__form" onsubmit="return false;">
+          <input class="newsletter__input" type="email" placeholder="your@email.com" />
+          <button class="newsletter__submit" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── FOOTER ────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand-title">The Seward Folly</div>
+        <p class="footer__mission">Our vision is to be the eyes, ears, and voice of our community.<br>Our mission is to inform, educate, and connect the people of Seward, Alaska.</p>
+        <div class="footer__social">
+          <a href="#" title="Facebook">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+          <a href="#" title="Instagram">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+        </div>
+        <div class="footer__contact">
+          P.O. Box 1983<br>Seward, AK 99664<br>sewardsfolly25@gmail.com
+        </div>
+      </div>
+      <div>
+        <div class="footer__col-heading">News</div>
+        <ul class="footer__links">
+          <li><a href="#">Arts &amp; Entertainment</a></li>
+          <li><a href="#">Business</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Education</a></li>
+          <li><a href="#">Government</a></li>
+          <li><a href="#">Health</a></li>
+          <li><a href="#">Housing</a></li>
+          <li><a href="#">Obituaries</a></li>
+          <li><a href="#">Opinions</a></li>
+          <li><a href="#">Police &amp; Fire</a></li>
+          <li><a href="#">Sports</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-heading">Resources</div>
+        <ul class="footer__links">
+          <li><a href="#">Business Directory</a></li>
+          <li><a href="#">Business Login</a></li>
+          <li><a href="#">Calendar</a></li>
+          <li><a href="#">Links</a></li>
+          <li><a href="#">Public Notices</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-heading">About</div>
+        <ul class="footer__links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Advertise</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Donate</a></li>
+          <li><a href="#">Sponsors</a></li>
+          <li><a href="#">Submit a Story</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 The Seward Folly. All rights reserved.</span>
+      <span>Made with ♥ for Seward, Alaska</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Hamburger menu toggle
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const menuCloseBtn = document.getElementById('menu-close-btn');
+  const slideMenu = document.getElementById('slide-menu');
+  const menuOverlay = document.getElementById('menu-overlay');
+
+  function openMenu() {
+    slideMenu.classList.add('slide-menu--open');
+    menuOverlay.classList.add('menu-overlay--open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    slideMenu.classList.remove('slide-menu--open');
+    menuOverlay.classList.remove('menu-overlay--open');
+    document.body.style.overflow = '';
+  }
+
+  hamburgerBtn.addEventListener('click', openMenu);
+  menuCloseBtn.addEventListener('click', closeMenu);
+  menuOverlay.addEventListener('click', closeMenu);
+
+  // Comments toggle
+  document.getElementById('comments-toggle').addEventListener('click', function() {
+    document.getElementById('comments-section').classList.toggle('comments--expanded');
+  });
+
+  // Accordion toggles
+  document.querySelectorAll('[data-menu-toggle]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const targetId = btn.getAttribute('data-menu-toggle');
+      const target = document.getElementById(targetId);
+      const isOpen = target.classList.contains('slide-menu__links--open');
+      document.querySelectorAll('.slide-menu__links').forEach(function (el) {
+        el.classList.remove('slide-menu__links--open');
+      });
+      document.querySelectorAll('.slide-menu__heading').forEach(function (el) {
+        el.classList.remove('slide-menu__heading--open');
+      });
+      if (!isOpen) {
+        target.classList.add('slide-menu__links--open');
+        btn.classList.add('slide-menu__heading--open');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

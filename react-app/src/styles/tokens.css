@@ -1,0 +1,16 @@
+:root {
+  --ink:      #253446;
+  --ink-soft: #4a5568;
+  --slate:    #466168;
+  --sage:     #90a27b;
+  --sage-light: #dfe8d6;
+  --terracotta: #e3ad7d;
+  --terracotta-light: #f5e6d4;
+  --cream:    #F7F6F1;
+  --warm-white: #fdfcf8;
+  --sand:     #e8dcc8;
+  --divider:  #d8d0c4;
+  --serif:    'Playfair Display', Georgia, serif;
+  --sans:     'Source Sans 3', system-ui, sans-serif;
+  --header-h: 64px;
+}

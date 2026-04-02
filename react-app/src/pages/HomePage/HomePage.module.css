@@ -1,0 +1,622 @@
+/* ── Feed layout: left sidebar + content ── */
+.feedLayout {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 40px;
+  padding-top: 20px;
+}
+
+/* ── Sidebar section nav ── */
+.feedSidebar {
+  position: sticky;
+  top: calc(var(--header-h) + 16px);
+  align-self: start;
+  padding-top: 8px;
+}
+
+.feedSidebarLabel {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: .5;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--divider);
+}
+
+.feedSidebarLinks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.feedSidebarLink {
+  display: block;
+  padding: 7px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  transition: color .2s;
+  border-left: 3px solid transparent;
+  padding-left: 12px;
+  text-decoration: none;
+}
+
+.feedSidebarLink:hover {
+  color: var(--ink);
+  text-decoration: none;
+  border-left-color: var(--terracotta);
+}
+
+/* ── Feed main column ── */
+.feedMain {
+  min-width: 0;
+}
+
+/* ── Per-section row: content + sticky ad side-by-side ── */
+.feedSectionRow {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 40px;
+}
+
+.feedSectionRowAd {
+  text-align: center;
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+  align-self: start;
+  padding-top: 60px;
+}
+
+/* ── Between-section ads (shown only at narrow widths) ── */
+.feedAdBetween {
+  display: none;
+  text-align: center;
+  padding: 28px 0;
+  border-top: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+}
+
+.feedAdBetweenBox {
+  margin: 0 auto;
+}
+
+.feedAdBetweenLabel {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: .45;
+  margin-bottom: 6px;
+}
+
+/* ── Ad box shared styles ── */
+.adLabel {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: .45;
+  margin-bottom: 6px;
+}
+
+.adBox {
+  width: 300px;
+  height: 300px;
+  background: var(--cream);
+  border: 1px solid var(--divider);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.adPlaceholder {
+  font-size: 12px;
+  color: var(--ink-soft);
+  opacity: .5;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.adPlaceholder a {
+  color: var(--slate);
+  font-weight: 700;
+}
+
+.adPlaceholder a:hover {
+  text-decoration: underline;
+}
+
+/* ── Section group ── */
+.feedSection {
+  padding-bottom: 8px;
+  scroll-margin-top: calc(var(--header-h) + 12px);
+}
+
+.feedSectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0 10px;
+  border-bottom: 3px solid var(--terracotta);
+  margin-bottom: 6px;
+}
+
+.feedSectionTitle {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--slate);
+  white-space: nowrap;
+}
+
+.feedSectionLine {
+  flex: 1;
+  height: 0;
+}
+
+/* ── Underwriting badge ── */
+.feedUnderwriting {
+  background: var(--sage-light);
+  border-radius: 0 0 4px 4px;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.feedUnderwritingLabel {
+  font-weight: 400;
+  opacity: .7;
+}
+
+.feedUnderwritingSponsor {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.feedUnderwriting a {
+  color: var(--slate);
+  font-weight: 700;
+}
+
+.feedUnderwriting a:hover {
+  text-decoration: underline;
+}
+
+/* ── Story cards ── */
+.feedCard {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  transition: border-color .2s;
+}
+
+.feedSection .feedCard:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Story images: 300x300 */
+.feedCardImgLink {
+  display: block;
+  flex-shrink: 0;
+  width: 300px;
+  text-decoration: none;
+}
+
+.feedCardImgPlaceholder {
+  width: 300px;
+  height: 300px;
+  border-radius: 4px;
+}
+
+.feedCardBody {
+  flex: 1;
+  min-width: 0;
+  padding-top: 4px;
+}
+
+.feedCardHeadline {
+  font-family: var(--sans);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.feedCardHeadline a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.feedCardHeadline a:hover {
+  color: var(--slate);
+  text-decoration: none;
+}
+
+.feedCardExcerpt {
+  font-size: 19px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.feedCardMeta {
+  font-size: 15px;
+  color: var(--ink-soft);
+  opacity: .8;
+}
+
+/* ── Sponsored content card (native ad) ── */
+.feedCardSponsored {
+  composes: feedCard;
+  border-color: var(--divider);
+  background: var(--cream);
+}
+
+.feedCardSponsoredLabelAbove {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: .5;
+  margin-bottom: 6px;
+  display: none;
+}
+
+.feedCardSponsoredBodyBefore {
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: .5;
+  margin-bottom: 6px;
+}
+
+.feedCardSponsored .feedCardImgPlaceholder {
+  width: 300px;
+  height: 300px;
+}
+
+.sponsoredHeadline {
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.sponsoredHeadline a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.sponsoredHeadline a:hover {
+  color: var(--slate);
+  text-decoration: none;
+}
+
+.sponsoredExcerpt {
+  font-size: 16px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.feedCardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  border-radius: 3px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--slate);
+  border: none;
+  cursor: pointer;
+  transition: background .2s;
+  text-decoration: none !important;
+}
+
+.feedCardCta:hover {
+  background: #354f56;
+}
+
+/* ── Section footer: More Stories ── */
+.feedSectionFooter {
+  padding-top: 20px;
+}
+
+.feedSectionActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feedSectionMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 28px;
+  border-radius: 4px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--slate);
+  background: transparent;
+  border: 2px solid var(--slate);
+  cursor: pointer;
+  transition: all .2s;
+  text-decoration: none !important;
+}
+
+.feedSectionMore:hover {
+  background: var(--slate);
+  color: #fff;
+}
+
+/* ── Hero top story (desktop) ── */
+.feedCardHero {
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  margin-bottom: 32px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  border: 1px solid transparent;
+  transition: border-color .2s;
+}
+
+.heroImgLink {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+}
+
+.heroImgPlaceholder {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  border-radius: 0;
+}
+
+.heroBody {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 80px 32px 28px;
+  background: linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.45) 60%, transparent 100%);
+  color: #fff;
+}
+
+.heroHeadline {
+  font-family: var(--sans);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.heroHeadline a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.heroHeadline a:hover {
+  color: rgba(255,255,255,.85);
+  text-decoration: none;
+}
+
+.heroExcerpt {
+  color: rgba(255,255,255,.85);
+  font-size: 17px;
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+
+.heroMeta {
+  font-size: 15px;
+  color: rgba(255,255,255,.65);
+  opacity: .8;
+}
+
+/* ── Responsive ── */
+
+/* Per-section ad column collapses; between-section ads appear */
+@media (max-width: 1280px) {
+  .feedLayout {
+    grid-template-columns: 160px 1fr;
+  }
+  .feedSectionRow {
+    grid-template-columns: 1fr;
+  }
+  .feedSectionRowAd {
+    display: none;
+  }
+  .feedAdBetween {
+    display: block;
+  }
+}
+
+/* Left sidebar also collapses */
+@media (max-width: 960px) {
+  .feedLayout {
+    grid-template-columns: 1fr;
+  }
+  .feedSidebar {
+    display: none;
+  }
+  .feedCardImgLink {
+    width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Reduce top spacing */
+  .feedLayout {
+    padding-top: 16px;
+  }
+
+  /* Underwriting: single inline line */
+  .feedUnderwriting {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+
+  /* Cards: full-width images (square), tight text padding */
+  .feedCard {
+    flex-direction: column;
+    gap: 12px;
+    padding: 0;
+    margin-bottom: 28px;
+    border: none;
+    border-radius: 0;
+  }
+  .feedCardImgLink {
+    width: 100%;
+    display: block;
+  }
+  .feedCardImgPlaceholder {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    border-radius: 0;
+  }
+  .feedCardBody {
+    padding: 0 16px;
+  }
+  .feedCardHeadline {
+    font-size: 22px;
+  }
+  .feedCardExcerpt {
+    font-size: 16px;
+  }
+
+  /* Section header & underwriting need horizontal padding */
+  .feedSectionHeader {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .feedUnderwriting {
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 0;
+  }
+  .feedSectionFooter {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .feedAdBetween {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Hero: strip all desktop overlay styling, match normal cards exactly */
+  .feedCardHero {
+    border-radius: 0;
+    overflow: visible;
+    margin-bottom: 28px;
+    gap: 12px;
+  }
+  .heroImgLink {
+    width: 100%;
+  }
+  .heroImgPlaceholder {
+    aspect-ratio: 1/1;
+  }
+  .heroBody {
+    position: relative;
+    background: none;
+    padding: 0 16px;
+    color: var(--ink);
+  }
+  .heroHeadline {
+    color: var(--ink);
+    font-size: 22px;
+  }
+  .heroHeadline a {
+    color: var(--ink);
+  }
+  .heroHeadline a:hover {
+    color: var(--slate);
+    text-decoration: none;
+  }
+  .heroExcerpt {
+    color: var(--ink-soft);
+    font-size: 16px;
+  }
+  .heroMeta {
+    color: var(--ink-soft);
+  }
+
+  /* Sponsored card: full-width gray background, no border, label above image */
+  .feedCardSponsored {
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    background: var(--cream);
+    margin-left: 0;
+    margin-right: 0;
+    gap: 0;
+  }
+  .feedCardSponsoredLabelAbove {
+    display: block;
+    padding: 10px 16px 6px;
+    margin-bottom: 0;
+  }
+  .feedCardSponsoredBodyBefore {
+    display: none;
+  }
+  .feedCardSponsored .feedCardImgLink {
+    width: 100%;
+  }
+  .feedCardSponsored .feedCardImgPlaceholder {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    border-radius: 0;
+  }
+  .sponsoredBody {
+    padding: 12px 16px 16px;
+  }
+  .sponsoredHeadline {
+    font-size: 20px;
+  }
+  .sponsoredExcerpt {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* smaller fonts handled by global styles */
+}

@@ -1,0 +1,37 @@
+export const articleData = {
+  category: 'Sports',
+  categoryHref: '#',
+  headline: 'Travis Beals of Seward takes second place in 2026 Iditarod',
+  excerpt: "Seward's own musher crosses the Nome finish line in second place, cementing his place among Alaska's elite in one of the world's most challenging races.",
+  author: 'The Seward Folly Staff',
+  date: 'March 19, 2026',
+  dateISO: '2026-03-19',
+  featuredImageGradient: 'linear-gradient(135deg, #3a6073 0%, #16222a 100%)',
+  featuredImageCaption: 'Photo by Sarah Stokey',
+  sponsor: 'Your Business Name',
+  paragraphs: [
+    { type: 'text', html: '<strong>Update:</strong> Travis Beals took second place in the 2026 Iditarod Race, finishing about 4 hours after Jessie Holmes. Seward had a strong showing in the race this year. As of Wednesday evening, Sadie Lindquist and Sam Paperman, both making their rookie runs, were in Elim, ready for their final push into Nome. Hanna Lyrek, who spent a portion of her life in Seward, now hailing from northern Norway, took 11th.' },
+    { type: 'text', html: 'As of March 16, Travis Beals had surged into second place in the 2026 Iditarod Sled Dog Race, putting himself firmly in contention as the teams headed toward the final miles of the Last Great Race.' },
+    { type: 'text', html: 'Beals made his move, stopping in Unalakleet for just seven minutes, a calculated decision that allowed him to close the gap on current leaders Jessie Holmes and Paige Drobny. Holmes had arrived in Unalakleet earlier, taking a three-hour and thirty-five-minute rest.' },
+    { type: 'inline-ad' },
+    { type: 'figure', gradient: 'linear-gradient(135deg, #2c3e50 0%, #3498db 100%)', caption: 'Photo by Sarah Stokey' },
+    { type: 'text', html: 'Fellow musher Paige Drobny opted for an even longer break, staying six hours and twelve minutes. Both Holmes and Drobny caught a quick meal at the Peace of Earth Restaurant and some sleep in a heated cabin, while Beals decided to push forward and take his breaks on the way to Shaktoolik.' },
+    { type: 'text', html: 'Other top contenders also chose short stops at this critical stage. Mille Porsild and Wade Morris spent 17 and 11 minutes in Unalakleet, respectively. As the leaders approached Koyuk on the coast of Norton Sound, less than five hours separated the top five mushers. The pack then headed into Elim before turning inland at Golovin. All teams face a mandatory eight-hour layover at White Mountain before the final push to Nome.' },
+    { type: 'text', html: 'Beals and his wife, Sarah Stokey, run Turning Heads Kennel in Seward, where they offer dog mushing experiences for tourists.' },
+    { type: 'blockquote', text: "We really work together as a unit. He's the only one of his mushing group with kids, and he's an incredible dad. At every opportunity, he's sending us a message. As a matter of fact, in a race that every minute can matter, Travis was late on his leaving after his 8-hour layover so he could get on the phone and speak with the kids. We hope he has a really good race and that we can live this kind of a life, as a mushing family.", cite: '— Sarah Stokey' },
+    { type: 'text', html: "This is Beals' twelfth Iditarod. The family is grateful for his chance to race this year, especially after a difficult December, when Beals' mother, Susan Lynn Simonds-McHone, passed away. The couple recently welcomed their second child, a son, just nine weeks ago." },
+    { type: 'text', html: 'As the race enters its final stages, other Seward locals are also in the race: Sadie Lindquist and Sam Paperman are currently in 29th and 30th place. Full standings and updates are available on the <a href="#">official Iditarod Insider website</a>.' },
+  ],
+  comments: [
+    { id: 1, avatar: 'D', author: 'Dana', date: 'March 16, 2026', body: 'Go Travis and the Turning Heads Kennel Team. Keep chasing him, Sam and Sadie! You all look strong!' },
+    { id: 2, avatar: 'M', author: 'Mike', date: 'March 17, 2026', body: "What an incredible showing from Seward this year. Travis, Sadie, and Sam are making the whole town proud. Can't wait to see the finish!" },
+  ],
+  moreStories: {
+    heading: 'More from Sports',
+    stories: [
+      { category: 'Sports', title: 'Seahawks capture back-to-back 2A State Basketball Titles', meta: 'March 18, 2026', gradient: 'linear-gradient(135deg, #2c5364 0%, #203a43 50%, #0f2027 100%)' },
+      { category: 'Sports', title: 'Seward Cheer Squad Shines at State, Takes Top Honors', meta: 'March 17, 2026', gradient: 'linear-gradient(135deg, #1a2980 0%, #26d0ce 100%)' },
+      { category: 'Sports', title: 'Youth hockey league wraps up season with championship weekend', meta: 'March 15, 2026', gradient: 'linear-gradient(135deg, #3a6186 0%, #89253e 100%)' },
+    ],
+  },
+};

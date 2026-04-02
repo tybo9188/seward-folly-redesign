@@ -1,0 +1,68 @@
+/* ── Feed variant (below section header) ── */
+.feed {
+  background: var(--sage-light);
+  border-radius: 0 0 4px 4px;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+/* ── Article variant ── */
+.article {
+  background: var(--sage-light);
+  border-radius: 4px;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 24px;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+/* ── Shared inner elements ── */
+.label {
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.sponsor {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.feed a,
+.article a {
+  color: var(--slate);
+  font-weight: 700;
+}
+
+.feed a:hover,
+.article a:hover {
+  text-decoration: underline;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .feed {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+  .article {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    font-size: 11px;
+    padding: 8px 12px;
+    border-radius: 0;
+    margin-left: -24px;
+    margin-right: -24px;
+  }
+}

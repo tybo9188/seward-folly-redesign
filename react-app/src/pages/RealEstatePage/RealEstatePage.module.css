@@ -1,0 +1,342 @@
+/* ── Article layout (shared with article page) ───── */
+.articleLayout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  column-gap: 48px;
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+.articleMainCol { grid-column: 1; }
+.sidebarAdZone { grid-column: 2; padding-top: 0; }
+
+/* ── Featured image ────────────────────────────── */
+.articleFeaturedImg {
+  margin-bottom: 32px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.articleFeaturedImgPlaceholder {
+  width: 100%;
+  aspect-ratio: 16/9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.articleFeaturedImg figcaption {
+  font-size: 13px;
+  color: var(--ink-soft);
+  padding: 10px 0;
+  font-style: italic;
+}
+
+/* ── Article body (intro paragraphs) ─────────────── */
+.articleBody {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--ink);
+}
+.articleBody p {
+  margin-bottom: 24px;
+}
+.articleBody strong {
+  font-weight: 700;
+}
+.articleBody a {
+  color: var(--slate);
+  text-decoration: underline;
+  text-decoration-color: var(--sage-light);
+  text-underline-offset: 2px;
+  transition: text-decoration-color .2s;
+}
+.articleBody a:hover {
+  text-decoration-color: var(--slate);
+}
+
+/* ── CTA banner ───────────────────────────────── */
+.reCtaBanner {
+  background: var(--cream);
+  border-radius: 6px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.reCtaBanner p {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--ink-soft);
+  margin-bottom: 0;
+}
+.btnCta {
+  font-size: 11px;
+  font-family: var(--sans);
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 9px 18px;
+  border-radius: 3px;
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .2s;
+  text-decoration: none !important;
+}
+.btnCta:hover { background: #354f56; }
+
+/* ── Section headings ─────────────────────────── */
+.reSectionHeading {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--ink-soft);
+  margin: 36px 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--divider);
+}
+.reSectionHeading:first-of-type { margin-top: 0; }
+
+/* ── Listing card ─────────────────────────────── */
+.listingCard {
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 28px;
+  background: var(--warm-white);
+}
+.listingCardImg {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+}
+.listingCardBody {
+  padding: 24px;
+}
+.listingCardAddress {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.listingCardCity {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+
+/* ── Stats grid ───────────────────────────────── */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border: 1px solid var(--divider);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.statCell {
+  padding: 10px 8px;
+  text-align: center;
+  border-right: 1px solid var(--divider);
+}
+.statCell:last-child { border-right: none; }
+.statCellHighlight { background: var(--cream); }
+.statCellVal {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.statCellLbl {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+
+/* ── Listing facts ────────────────────────────── */
+.listingCardFacts {
+  list-style: none;
+  margin-bottom: 20px;
+}
+.listingCardFacts li {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  padding-left: 20px;
+  position: relative;
+  margin-bottom: 2px;
+}
+.listingCardFacts li::before {
+  content: "\2014";
+  position: absolute;
+  left: 0;
+  color: var(--divider);
+}
+
+/* ── Listing footer ───────────────────────────── */
+.listingCardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--cream);
+}
+.listingCardAgent {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+.listingCardAgent strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.listingCardView {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 4px;
+  border: 1px solid var(--divider);
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all .15s;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+.listingCardView:hover {
+  background: var(--cream);
+  border-color: var(--sand);
+}
+
+/* ── Empty section note ───────────────────────── */
+.reEmpty {
+  font-size: 14px;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin-bottom: 32px;
+}
+
+/* ── CTA form ─────────────────────────────────── */
+.reCtaForm {
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+  padding: 28px;
+  margin-top: 8px;
+}
+.reCtaFormHeading {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.reCtaFormSub {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+.reFormRow {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.reFormRow input { flex: 1; }
+.reInput,
+.reSelect,
+.reTextarea {
+  font-family: var(--sans);
+  font-size: 14px;
+  padding: 10px 14px;
+  border-radius: 4px;
+  border: 1px solid var(--divider);
+  background: #fff;
+  color: var(--ink);
+  width: 100%;
+  margin-bottom: 10px;
+  outline: none;
+  transition: border-color .2s;
+}
+.reInput:focus,
+.reSelect:focus,
+.reTextarea:focus { border-color: var(--slate); }
+.reTextarea { resize: vertical; min-height: 90px; }
+.reSubmit {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border-radius: 4px;
+  background: var(--slate);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background .2s;
+  margin-top: 4px;
+}
+.reSubmit:hover { background: #354f56; }
+.reSuccess {
+  font-size: 14px;
+  color: var(--sage);
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* ── Responsive ─────────────────────────────── */
+@media (max-width: 960px) {
+  .articleLayout {
+    grid-template-columns: 1fr;
+  }
+  .sidebarAdZone {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .articleLayout { padding-top: 24px; padding-bottom: 40px; }
+
+  /* Featured image: full-bleed */
+  .articleFeaturedImg {
+    border-radius: 0;
+    margin-left: -24px;
+    margin-right: -24px;
+  }
+
+  /* Body adjustments */
+  .articleBody { font-size: 17px; }
+
+  /* Listing cards: full-bleed */
+  .listingCard {
+    margin-left: -24px;
+    margin-right: -24px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  /* Stats grid: scroll on small screens */
+  .statsGrid {
+    grid-template-columns: repeat(6, minmax(70px, 1fr));
+    overflow-x: auto;
+  }
+
+  /* CTA banner wrap */
+  .reCtaBanner { flex-direction: column; text-align: center; }
+
+  /* Form row stack */
+  .reFormRow { flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+  .statsGrid { grid-template-columns: repeat(3, 1fr); }
+  .listingCardFooter { flex-direction: column; align-items: flex-start; }
+}

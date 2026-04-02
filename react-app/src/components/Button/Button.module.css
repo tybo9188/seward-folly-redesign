@@ -1,0 +1,74 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: 3px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+
+.subscribe {
+  background: var(--slate);
+  color: #fff;
+  border-color: var(--slate);
+}
+
+.subscribe:hover {
+  background: #354f56;
+  border-color: #354f56;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  border-radius: 3px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--slate);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none !important;
+}
+
+.cta:hover {
+  background: #354f56;
+}
+
+.outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 28px;
+  border-radius: 4px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--slate);
+  background: transparent;
+  border: 2px solid var(--slate);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none !important;
+}
+
+.outline:hover {
+  background: var(--slate);
+  color: #fff;
+}

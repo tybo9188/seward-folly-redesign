@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10411 Bearpaw Dr – The Seward Folly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & base ────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:      #253446;
+      --ink-soft: #4a5568;
+      --slate:    #466168;
+      --sage:     #90a27b;
+      --sage-light: #dfe8d6;
+      --terracotta: #e3ad7d;
+      --terracotta-light: #f5e6d4;
+      --cream:    #F7F6F1;
+      --warm-white: #fdfcf8;
+      --sand:     #e8dcc8;
+      --divider:  #d8d0c4;
+      --serif:    'Playfair Display', Georgia, serif;
+      --sans:     'Source Sans 3', system-ui, sans-serif;
+    }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--warm-white);
+      color: var(--ink);
+      line-height: 1.6;
+      padding-bottom: 72px;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Hero (photo + map share this space) ────── */
+    .hero {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      max-height: 56vh;
+      overflow: hidden;
+    }
+
+    /* Panels: photo and map */
+    .hero__panel {
+      position: absolute;
+      inset: 0;
+      transition: opacity .3s ease;
+    }
+    .hero__panel--hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .hero__photo {
+      background: linear-gradient(135deg, #355c3a 0%, #1a3a1d 100%);
+      cursor: pointer;
+    }
+    .hero__photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero__map {
+      background: var(--cream);
+    }
+    .hero__map-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+    .hero__map iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Street View toggle (shown only when map is active) */
+    .hero__street-view-toggle {
+      position: absolute;
+      bottom: 56px;
+      right: 16px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      background: #fff;
+      border: 1px solid var(--divider);
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 0 1px 4px rgba(0,0,0,.1);
+      transition: background .15s;
+      z-index: 2;
+    }
+    .hero__street-view-toggle:hover { background: var(--cream); }
+
+    /* Top overlay: back + share */
+    .hero__overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 16px;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .hero__btn {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0,0,0,.45);
+      backdrop-filter: blur(4px);
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      transition: background .2s;
+    }
+    .hero__btn:hover { background: rgba(0,0,0,.65); }
+    .hero__btn svg { width: 20px; height: 20px; }
+
+    /* Photo count badge (photo panel only) */
+    .hero__photo-count {
+      position: absolute;
+      bottom: 56px;
+      right: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 4px;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(4px);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .hero__photo-count svg { width: 16px; height: 16px; }
+
+    /* Tab bar at bottom of hero */
+    .hero__tabs {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      z-index: 3;
+      background: rgba(0,0,0,.5);
+      backdrop-filter: blur(6px);
+    }
+    .hero__tab {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 0;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,.65);
+      cursor: pointer;
+      transition: color .2s, border-color .2s;
+    }
+    .hero__tab:hover { color: #fff; }
+    .hero__tab--active {
+      color: #fff;
+      border-bottom-color: #fff;
+    }
+    .hero__tab svg { width: 16px; height: 16px; }
+
+    /* ── Key info ─────────────────────────────────── */
+    .listing-info {
+      padding: 16px 20px 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Price */
+    .price-line {
+      margin-bottom: 4px;
+    }
+    .price-primary {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+
+    /* Stats line */
+    .stats-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 4px;
+      font-size: 16px;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .stats-line__val { font-weight: 600; }
+    .stats-line__lbl { color: var(--ink-soft); }
+    .stats-line__sep { color: var(--divider); margin: 0 6px; }
+    .stats-multiunit {
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+    }
+
+    /* Address (small, non-bold) */
+    .listing-address-full {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    /* Status line */
+    .listing-status-line {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--divider);
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+    .listing-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      line-height: 1.4;
+    }
+    .listing-badge--active {
+      background: var(--sage-light);
+      color: #3d6b2e;
+    }
+    .listing-badge--pending {
+      background: var(--terracotta-light);
+      color: #8a5a2c;
+    }
+    .listing-badge--contingent {
+      background: #e8e0f0;
+      color: #5a3d7a;
+    }
+    .listing-status-sep {
+      color: var(--divider);
+    }
+
+    /* Price details (inside More info) */
+    .price-details {
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+    .price-details strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .price-sep {
+      color: var(--divider);
+      margin: 0 4px;
+    }
+
+    /* Description (collapsed toggle with brief + full inside) */
+    .desc-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--slate);
+      margin-bottom: 8px;
+      transition: color .15s;
+    }
+    .desc-toggle:hover { color: var(--ink); }
+    .desc-toggle__arrow {
+      font-size: 10px;
+      transition: transform .25s;
+    }
+    .desc-toggle--open .desc-toggle__arrow {
+      transform: rotate(180deg);
+    }
+    .desc-body {
+      display: none;
+      margin-bottom: 8px;
+    }
+    .desc-body--open { display: block; }
+
+    .brief-desc {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+    .brief-desc li {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      padding-left: 18px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+    .brief-desc li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--divider);
+    }
+    .full-desc {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      border-top: 1px solid var(--cream);
+      padding-top: 12px;
+    }
+    .full-desc p { margin-bottom: 12px; }
+    .full-desc p:last-child { margin-bottom: 0; }
+
+    /* Listing agent footer */
+    .listing-agent {
+      padding-top: 20px;
+      border-top: 1px solid var(--divider);
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+    .listing-agent strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    /* ── Sticky bottom bar ────────────────────────── */
+    .sticky-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 90;
+      background: var(--warm-white);
+      border-top: 1px solid var(--divider);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sticky-bar__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      max-width: 560px;
+      padding: 14px 24px;
+      border-radius: 4px;
+      background: var(--slate);
+      color: #fff;
+      border: none;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .sticky-bar__btn:hover { background: #354f56; }
+
+    /* ── Photo gallery overlay ────────────────────── */
+    .gallery-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0,0,0,.92);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .gallery-overlay--open { display: flex; }
+    .gallery-overlay__close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.15);
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+    }
+    .gallery-overlay__close:hover { background: rgba(255,255,255,.3); }
+    .gallery-overlay__placeholder {
+      color: rgba(255,255,255,.6);
+      font-size: 16px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* ── Responsive ─────────────────────────────── */
+    @media (min-width: 769px) {
+      .hero { max-height: 480px; aspect-ratio: 16/9; }
+      .listing-info { padding: 20px 24px 24px; }
+      .price-primary { font-size: 32px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero { aspect-ratio: 4/3; max-height: 50vh; }
+      .listing-info { padding: 14px 16px 16px; }
+      .price-primary { font-size: 26px; }
+      .stats-line { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO (Photos + Map) ─────────────────────── -->
+<section class="hero" id="hero">
+  <div class="hero__panel hero__photo" id="hero-photo" onclick="openGallery()">
+    <div style="width:100%;height:100%;background:linear-gradient(135deg, #355c3a 0%, #1a3a1d 100%)"></div>
+  </div>
+  <div class="hero__panel hero__map hero__panel--hidden" id="hero-map">
+    <div class="hero__map-placeholder">
+      Google Map — 10411 Bearpaw Dr, Seward, AK 99664
+    </div>
+  </div>
+  <div class="hero__overlay">
+    <button class="hero__btn" onclick="event.stopPropagation(); history.back();" aria-label="Go back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
+    </button>
+    <button class="hero__btn" onclick="event.stopPropagation(); sharelisting();" aria-label="Share listing">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+    </button>
+  </div>
+  <div class="hero__photo-count" id="hero-photo-count" onclick="event.stopPropagation(); openGallery();">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+    24 photos
+  </div>
+  <button class="hero__street-view-toggle" id="street-view-toggle" style="display:none;">Street View</button>
+  <div class="hero__tabs">
+    <button class="hero__tab hero__tab--active" id="tab-photos" onclick="switchHeroTab('photos')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+      Photos
+    </button>
+    <button class="hero__tab" id="tab-map" onclick="switchHeroTab('map')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+      Map
+    </button>
+  </div>
+</section>
+
+<!-- ── KEY INFO ────────────────────────────────── -->
+<div class="listing-info">
+
+  <!-- 1. Price -->
+  <div class="price-line">
+    <span class="price-primary">$1,400,000</span>
+  </div>
+
+  <!-- 2. Stats -->
+  <div class="stats-line">
+    <span class="stats-line__val">4</span> <span class="stats-line__lbl">bds</span>
+    <span class="stats-line__sep">|</span>
+    <span class="stats-line__val">5</span> <span class="stats-line__lbl">ba</span>
+    <span class="stats-line__sep">|</span>
+    <span class="stats-line__val">3,320</span> <span class="stats-line__lbl">sq ft</span>
+    <span class="stats-line__sep">|</span>
+    <span class="stats-line__val">0.94</span> <span class="stats-line__lbl">acres</span>
+  </div>
+  <!-- Multi-unit breakdown (show only if applicable) -->
+  <!--
+  <div class="stats-multiunit">across 3 units (3/2, 1/1, 1/1)</div>
+  -->
+
+  <!-- 3. Address (small, non-bold) -->
+  <div class="listing-address-full">
+    10411 Bearpaw Dr, Seward, AK 99664
+  </div>
+
+  <!-- 4. Status | Days | Property Type -->
+  <div class="listing-status-line">
+    <span class="listing-badge listing-badge--active">Active</span>
+    <span class="listing-status-sep">|</span>
+    <span>47 days</span>
+    <span class="listing-status-sep">|</span>
+    <span>Single Family</span>
+  </div>
+
+  <!-- 5. More info (collapsed) -->
+  <button class="desc-toggle" id="desc-toggle">
+    More info <span class="desc-toggle__arrow">▾</span>
+  </button>
+  <div class="desc-body" id="desc-body">
+    <!-- Price details -->
+    <div class="price-details">
+      <strong>$8,032</strong>/mo est.
+      <span class="price-sep">|</span>
+      <strong>$1,280,000</strong> est. value
+      <span class="price-sep">|</span>
+      Last sold <strong>$265,000</strong> (2014)
+    </div>
+    <!-- Brief description -->
+    <ul class="brief-desc">
+      <li>Hand-built log home on just under 1 acre</li>
+      <li>Main house: 3 bedrooms + flex room, 2 full baths, covered hot tub deck, 2-car garage</li>
+      <li>Separate duplex with 2 rental units; additional storage shed</li>
+    </ul>
+    <!-- Full description -->
+    <div class="full-desc">
+      <p>One-of-a-kind hand-built log home set on just under 1 acre in one of Seward's most sought-after neighborhoods. The main residence features 3 bedrooms plus a flexible bonus room, 2 full bathrooms, and spacious open-concept living areas with hand-peeled log walls throughout.</p>
+      <p>The covered deck with hot tub overlooks the surrounding Chugach foothills. A detached 2-car garage provides ample workshop and storage space. The property also includes a separate duplex with two income-producing rental units — ideal for offsetting your mortgage or housing extended family — plus an additional storage shed.</p>
+      <p>Well water, private septic, and oil heat. Road-maintained access year-round.</p>
+    </div>
+    <!-- Agent -->
+    <div class="listing-agent">
+      Listed by <strong>Ristine Casagranda</strong>, Coastal Heritage Properties, MLS# 26-1042
+    </div>
+  </div>
+
+
+</div>
+
+<!-- ── STICKY BOTTOM BAR ──────────────────────── -->
+<div class="sticky-bar">
+  <button class="sticky-bar__btn" type="button">I'm Interested</button>
+</div>
+
+<!-- ── PHOTO GALLERY OVERLAY ──────────────────── -->
+<div class="gallery-overlay" id="gallery-overlay">
+  <button class="gallery-overlay__close" onclick="closeGallery()" aria-label="Close gallery">✕</button>
+  <div class="gallery-overlay__placeholder">
+    Photo gallery would go here<br>
+    24 photos
+  </div>
+</div>
+
+<script>
+  // Description toggle
+  const descToggle = document.getElementById('desc-toggle');
+  const descBody = document.getElementById('desc-body');
+  descToggle.addEventListener('click', () => {
+    const open = descBody.classList.toggle('desc-body--open');
+    descToggle.classList.toggle('desc-toggle--open', open);
+    descToggle.firstChild.textContent = open ? 'Hide info ' : 'More info ';
+  });
+
+  // Photo gallery
+  function openGallery() {
+    document.getElementById('gallery-overlay').classList.add('gallery-overlay--open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeGallery() {
+    document.getElementById('gallery-overlay').classList.remove('gallery-overlay--open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeGallery();
+  });
+
+  // Share (uses Web Share API with clipboard fallback)
+  function sharelisting() {
+    const data = {
+      title: '10411 Bearpaw Dr – The Seward Folly',
+      url: window.location.href
+    };
+    if (navigator.share) {
+      navigator.share(data);
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(data.url);
+    }
+  }
+
+  // Hero tab switching (Photos / Map)
+  function switchHeroTab(tab) {
+    const photoPanel = document.getElementById('hero-photo');
+    const mapPanel = document.getElementById('hero-map');
+    const tabPhotos = document.getElementById('tab-photos');
+    const tabMap = document.getElementById('tab-map');
+    const photoCount = document.getElementById('hero-photo-count');
+    const streetViewBtn = document.getElementById('street-view-toggle');
+
+    if (tab === 'map') {
+      photoPanel.classList.add('hero__panel--hidden');
+      mapPanel.classList.remove('hero__panel--hidden');
+      tabPhotos.classList.remove('hero__tab--active');
+      tabMap.classList.add('hero__tab--active');
+      photoCount.style.display = 'none';
+      streetViewBtn.style.display = '';
+    } else {
+      mapPanel.classList.add('hero__panel--hidden');
+      photoPanel.classList.remove('hero__panel--hidden');
+      tabMap.classList.remove('hero__tab--active');
+      tabPhotos.classList.add('hero__tab--active');
+      photoCount.style.display = '';
+      streetViewBtn.style.display = 'none';
+    }
+  }
+
+  // Street View toggle placeholder
+  const streetViewToggle = document.getElementById('street-view-toggle');
+  streetViewToggle.addEventListener('click', () => {
+    const isStreet = streetViewToggle.textContent === 'Street View';
+    streetViewToggle.textContent = isStreet ? 'Map View' : 'Street View';
+  });
+</script>
+
+</body>
+</html>

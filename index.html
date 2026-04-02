@@ -11,20 +11,20 @@
     /* ── Reset & base ────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --ink:      #1a1a2e;
-      --ink-soft: #3d3d5c;
-      --slate:    #2c3e50;
-      --glacier:  #4a7c87;
-      --glacier-light: #d6eaed;
-      --tundra:   #7a8c6e;
-      --cream:    #f8f5f0;
-      --warm-white: #fdfcfa;
+      --ink:      #253446;
+      --ink-soft: #4a5568;
+      --slate:    #466168;
+      --sage:     #90a27b;
+      --sage-light: #dfe8d6;
+      --terracotta: #e3ad7d;
+      --terracotta-light: #f5e6d4;
+      --cream:    #F7F6F1;
+      --warm-white: #fdfcf8;
       --sand:     #e8dcc8;
-      --rust:     #b5451b;
-      --gold:     #c9973a;
       --divider:  #d8d0c4;
       --serif:    'Playfair Display', Georgia, serif;
       --sans:     'Source Sans 3', system-ui, sans-serif;
+      --header-h: 64px;
     }
     html { font-size: 16px; scroll-behavior: smooth; }
     body {
@@ -41,73 +41,39 @@
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
     .container--wide { max-width: 1440px; }
 
-    /* ── Masthead ───────────────────────────────── */
+    /* ── Masthead (sticky, full-width, centered logo) ── */
     .masthead {
       background: var(--warm-white);
       border-bottom: 3px solid var(--ink);
-      padding: 20px 0 16px;
-    }
-    .masthead__inner {
-      display: flex;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--header-h);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
+      padding: 0 24px;
     }
-    .masthead__brand {
-      display: flex;
-      flex-direction: column;
-    }
+    /* Empty left spacer on desktop for centering */
+    .masthead__spacer { display: block; }
     .masthead__logo-wrap {
       display: flex;
       align-items: center;
       gap: 12px;
+      justify-self: center;
     }
     .masthead__mountain {
-      width: 52px;
-      height: 40px;
+      width: 44px;
+      height: 34px;
       flex-shrink: 0;
     }
     .masthead__title {
       font-family: var(--serif);
-      font-size: 38px;
+      font-size: 32px;
       font-weight: 900;
       letter-spacing: -.01em;
       line-height: 1;
       color: var(--ink);
-    }
-    .masthead__date {
-      font-family: var(--sans);
-      font-size: 12px;
-      color: var(--ink-soft);
-      margin-top: 6px;
-      padding-left: 64px;
-      letter-spacing: .03em;
-    }
-    .masthead__right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-shrink: 0;
-    }
-    /* Social icons in masthead */
-    .masthead__social {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-    .masthead__social a {
-      display: inline-flex;
-      align-items: center;
-      color: var(--ink-soft);
-      transition: color .2s;
-    }
-    .masthead__social a:hover { color: var(--ink); text-decoration: none; }
-    /* Thin separator */
-    .masthead__sep {
-      width: 1px;
-      height: 24px;
-      background: var(--divider);
-      flex-shrink: 0;
     }
 
     /* ── Buttons ────────────────────────────────── */
@@ -128,101 +94,180 @@
       text-decoration: none !important;
       white-space: nowrap;
     }
-    /* Primary: Subscribe Free — filled ink */
     .btn--subscribe {
-      background: var(--ink);
+      background: var(--slate);
       color: #fff;
-      border-color: var(--ink);
+      border-color: var(--slate);
     }
-    .btn--subscribe:hover { background: #0d0d20; border-color: #0d0d20; }
-    /* Secondary: Donate — outline */
-    .btn--donate {
-      background: transparent;
-      color: var(--ink);
-      border-color: var(--ink);
-    }
-    .btn--donate:hover { background: var(--ink); color: #fff; }
+    .btn--subscribe:hover { background: #354f56; border-color: #354f56; }
 
-    /* ── Nav ────────────────────────────────────── */
-    .nav {
-      background: var(--ink);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    /* ── Masthead right controls ───────────────────── */
+    .masthead__right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-self: end;
     }
-    .nav__inner {
+
+    /* ── Hamburger button ──────────────────────────── */
+    .hamburger {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0;
-    }
-    .nav__item {
-      position: relative;
-    }
-    .nav__link {
-      display: block;
-      padding: 14px 22px;
-      font-family: var(--sans);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.75);
-      transition: color .2s, background .2s;
-      white-space: nowrap;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: none;
       cursor: pointer;
+      padding: 0;
     }
-    .nav__link:hover {
-      color: #fff;
-      background: rgba(255,255,255,.07);
-      text-decoration: none;
+    .hamburger__lines {
+      width: 22px;
+      height: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    /* Subscribe Free nav CTA */
-    .nav__link--subscribe {
-      background: var(--glacier);
-      color: #fff !important;
-      margin-left: 8px;
-    }
-    .nav__link--subscribe:hover { background: #3d6b75 !important; }
-    /* Dropdown */
-    .nav__dropdown {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: var(--slate);
-      min-width: 210px;
-      padding: 8px 0;
-      box-shadow: 0 8px 24px rgba(0,0,0,.3);
-    }
-    .nav__item:hover .nav__dropdown { display: block; }
-    .nav__dropdown a {
+    .hamburger__line {
       display: block;
-      padding: 9px 18px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.7);
-    }
-    .nav__dropdown a:hover {
-      color: #fff;
-      background: rgba(255,255,255,.08);
-      text-decoration: none;
+      width: 100%;
+      height: 2px;
+      background: var(--ink);
+      border-radius: 1px;
     }
 
-    /* ── Feed layout: left sidebar + content + right rail ── */
+    /* ── Slide-out menu ────────────────────────────── */
+    .menu-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.3);
+      z-index: 150;
+    }
+    .menu-overlay--open { display: block; }
+
+    .slide-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 340px;
+      max-width: 85vw;
+      height: 100vh;
+      background: var(--warm-white);
+      z-index: 160;
+      transform: translateX(100%);
+      transition: transform .3s ease;
+      overflow-y: auto;
+      padding: 0 0 32px;
+      box-shadow: -4px 0 24px rgba(0,0,0,.1);
+    }
+    .slide-menu--open {
+      transform: translateX(0);
+    }
+    .slide-menu__close {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--divider);
+    }
+    .slide-menu__close-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 1;
+      border-radius: 4px;
+      transition: background .15s;
+    }
+    .slide-menu__close-btn:hover {
+      background: var(--cream);
+    }
+    .slide-menu__section {
+      border-bottom: 1px solid var(--divider);
+    }
+    .slide-menu__heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      transition: background .15s;
+    }
+    .slide-menu__heading:hover {
+      background: var(--cream);
+    }
+    .slide-menu__arrow {
+      font-size: 10px;
+      transition: transform .25s;
+      color: var(--ink-soft);
+    }
+    .slide-menu__heading--open .slide-menu__arrow {
+      transform: rotate(180deg);
+    }
+    .slide-menu__links {
+      display: none;
+      list-style: none;
+      padding: 0 24px 16px;
+    }
+    .slide-menu__links--open {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .slide-menu__links a {
+      display: block;
+      padding: 9px 16px;
+      font-size: 14px;
+      color: var(--ink-soft);
+      transition: color .15s, background .15s;
+      border-radius: 4px;
+    }
+    .slide-menu__links a:hover {
+      color: var(--ink);
+      background: var(--cream);
+      text-decoration: none;
+    }
+    /* Contact info in menu */
+    .slide-menu__contact {
+      padding: 20px 24px;
+      font-size: 12px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+    .slide-menu__contact a {
+      color: var(--slate);
+      font-weight: 600;
+    }
+
+    /* ── Feed layout: left sidebar + content ── */
     .feed-layout {
       display: grid;
-      grid-template-columns: 160px 1fr 300px;
+      grid-template-columns: 160px 1fr;
       gap: 40px;
-      padding-top: 32px;
+      padding-top: 20px;
     }
 
     /* ── Sidebar section nav ──────────────────────── */
     .feed-sidebar {
       position: sticky;
-      top: 60px; /* below the sticky nav */
+      top: calc(var(--header-h) + 16px);
       align-self: start;
       padding-top: 8px;
     }
@@ -256,24 +301,15 @@
     .feed-sidebar__link:hover {
       color: var(--ink);
       text-decoration: none;
-      border-left-color: var(--glacier);
+      border-left-color: var(--terracotta);
     }
 
     /* ── Feed main column ─────────────────────────── */
-    .feed-main {}
+    .feed-main { min-width: 0; }
 
     /* ── Right rail (ad column) ────────────────────── */
     .feed-rail {
-      position: sticky;
-      top: 60px;
-      align-self: start;
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-      padding-top: 8px;
-    }
-    .feed-rail__ad {
-      text-align: center;
+      display: none; /* replaced by per-section rail */
     }
     .feed-rail__ad-label {
       font-size: 9px;
@@ -302,14 +338,23 @@
       line-height: 1.5;
     }
     .feed-rail__ad-placeholder a {
-      color: var(--glacier);
+      color: var(--slate);
       font-weight: 700;
     }
     .feed-rail__ad-placeholder a:hover { text-decoration: underline; }
-    .feed-rail__ad-size {
-      font-size: 10px;
-      opacity: .35;
-      margin-top: 2px;
+
+    /* ── Per-section row: content + sticky ad side-by-side ── */
+    .feed-section-row {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 40px;
+    }
+    .feed-section-row__ad {
+      text-align: center;
+      position: sticky;
+      top: calc(var(--header-h) + 24px);
+      align-self: start;
+      padding-top: 60px; /* align with first card image */
     }
 
     /* ── Between-section ads (shown only at narrow widths) ── */
@@ -336,20 +381,21 @@
     /* ── Section group ─────────────────────────── */
     .feed-section {
       padding-bottom: 8px;
+      scroll-margin-top: calc(var(--header-h) + 12px);
     }
     .feed-section__header {
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 28px 0 20px;
-      border-bottom: 3px solid var(--ink);
-      margin-bottom: 8px;
+      gap: 12px;
+      padding: 16px 0 10px;
+      border-bottom: 3px solid var(--terracotta);
+      margin-bottom: 6px;
     }
     .feed-section__title {
       font-family: var(--serif);
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 900;
-      color: var(--ink);
+      color: var(--slate);
       white-space: nowrap;
     }
     .feed-section__line {
@@ -359,14 +405,14 @@
 
     /* Underwriting — right after section header */
     .feed-underwriting {
-      background: var(--glacier-light);
+      background: var(--sage-light);
       border-radius: 0 0 4px 4px;
-      padding: 10px 20px;
+      padding: 8px 20px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      margin-bottom: 28px;
+      margin-bottom: 20px;
       font-size: 12px;
       color: var(--ink-soft);
     }
@@ -378,24 +424,24 @@
       font-weight: 700;
       color: var(--ink);
     }
-    .feed-underwriting a { color: var(--glacier); font-weight: 700; }
+    .feed-underwriting a { color: var(--slate); font-weight: 700; }
     .feed-underwriting a:hover { text-decoration: underline; }
 
-    /* Stories within a section */
+    /* ── Story cards ──────────────────────────────── */
     .feed-card {
       display: flex;
       gap: 32px;
       align-items: flex-start;
-      padding-bottom: 32px;
-      margin-bottom: 32px;
-      border-bottom: 1px solid var(--divider);
+      padding: 24px;
+      margin-bottom: 24px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      transition: border-color .2s;
     }
     .feed-section .feed-card:last-of-type {
-      border-bottom: none;
       margin-bottom: 0;
-      padding-bottom: 0;
     }
-    /* Story images: IAB Medium Rectangle 300×250 */
+    /* Story images: 300×300 */
     .feed-card__img-link {
       display: block;
       flex-shrink: 0;
@@ -413,33 +459,44 @@
     }
     .feed-card__headline {
       font-family: var(--sans);
-      font-size: 26px;
+      font-size: 30px;
       font-weight: 700;
-      line-height: 1.3;
+      line-height: 1.25;
       color: var(--ink);
       margin-bottom: 14px;
     }
-    .feed-card__headline a:hover { color: var(--glacier); text-decoration: none; }
+    .feed-card__headline a:hover { color: var(--slate); text-decoration: none; }
     .feed-card__excerpt {
-      font-size: 17px;
+      font-size: 19px;
       color: var(--ink-soft);
       line-height: 1.7;
       margin-bottom: 16px;
     }
     .feed-card__meta {
-      font-size: 14px;
+      font-size: 15px;
       color: var(--ink-soft);
       opacity: .8;
     }
 
     /* ── Sponsored content card (native ad) ───────── */
     .feed-card--sponsored {
-      margin-top: 32px;
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
+      border-color: var(--divider);
+      background: var(--cream);
     }
     .feed-card__sponsored-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      opacity: .5;
+      margin-bottom: 6px;
+      /* On desktop: visually collapse, label shows via body padding-top area */
+      display: none;
+    }
+    .feed-card--sponsored .feed-card__body::before {
+      content: 'Sponsored';
+      display: block;
       font-size: 9px;
       font-weight: 700;
       letter-spacing: .14em;
@@ -457,7 +514,7 @@
       margin-bottom: 10px;
     }
     .feed-card--sponsored .feed-card__headline a { color: var(--ink); }
-    .feed-card--sponsored .feed-card__headline a:hover { color: var(--glacier); }
+    .feed-card--sponsored .feed-card__headline a:hover { color: var(--slate); }
     .feed-card--sponsored .feed-card__excerpt {
       font-size: 16px;
       margin-bottom: 14px;
@@ -474,13 +531,13 @@
       letter-spacing: .04em;
       text-transform: uppercase;
       color: #fff;
-      background: var(--glacier);
+      background: var(--slate);
       border: none;
       cursor: pointer;
       transition: background .2s;
       text-decoration: none !important;
     }
-    .feed-card__cta:hover { background: #3d6b75; }
+    .feed-card__cta:hover { background: #354f56; }
 
     /* ── Section footer: More Stories ───────────── */
     .feed-section__footer {
@@ -501,21 +558,21 @@
       font-size: 13px;
       font-weight: 700;
       letter-spacing: .04em;
-      color: var(--glacier);
+      color: var(--slate);
       background: transparent;
-      border: 2px solid var(--glacier);
+      border: 2px solid var(--slate);
       cursor: pointer;
       transition: all .2s;
       text-decoration: none !important;
     }
     .feed-section__more:hover {
-      background: var(--glacier);
+      background: var(--slate);
       color: #fff;
     }
 
     /* ── Newsletter banner ──────────────────────── */
     .newsletter {
-      background: var(--glacier);
+      background: var(--slate);
       color: #fff;
       padding: 44px 0;
       margin-top: 40px;
@@ -568,7 +625,7 @@
       cursor: pointer;
       transition: background .2s;
     }
-    .newsletter__submit:hover { background: #0d0d1a; }
+    .newsletter__submit:hover { background: #1a2a35; }
 
     /* ── Footer ─────────────────────────────────── */
     .footer {
@@ -655,23 +712,69 @@
     }
 
     /* ── Color helpers ──────────────────────────── */
-    .bg-glacier { background: var(--glacier); }
-    .bg-tundra   { background: var(--tundra); }
-    .bg-rust     { background: var(--rust); }
-    .bg-slate    { background: var(--slate); }
-    .bg-ink      { background: var(--ink); }
-    .bg-ink-soft { background: var(--ink-soft); }
+    .bg-slate      { background: var(--slate); }
+    .bg-sage       { background: var(--sage); }
+    .bg-terracotta { background: var(--terracotta); }
+    .bg-ink        { background: var(--ink); }
+    .bg-ink-soft   { background: var(--ink-soft); }
+
+    /* Desktop: hide mobile-only subscribe in menu */
+    .slide-menu__subscribe-mobile { display: none; }
+
+    /* ── Hero top story (desktop) ──────────────────── */
+    .feed-card--hero {
+      flex-direction: column;
+      gap: 0;
+      padding: 0;
+      margin-bottom: 32px;
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .feed-card--hero .feed-card__img-link {
+      width: 100%;
+    }
+    .feed-card--hero .feed-card__img-placeholder {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      border-radius: 0;
+    }
+    .feed-card--hero .feed-card__body {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 80px 32px 28px;
+      background: linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.45) 60%, transparent 100%);
+      color: #fff;
+    }
+    .feed-card--hero .feed-card__headline {
+      color: #fff;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    .feed-card--hero .feed-card__headline a { color: #fff; }
+    .feed-card--hero .feed-card__headline a:hover { color: rgba(255,255,255,.85); }
+    .feed-card--hero .feed-card__excerpt {
+      color: rgba(255,255,255,.85);
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+    .feed-card--hero .feed-card__meta {
+      color: rgba(255,255,255,.65);
+    }
 
     /* ── Responsive ─────────────────────────────── */
-    /* Right rail collapses; between-section ads appear */
+    /* Per-section ad column collapses; between-section ads appear */
     @media (max-width: 1280px) {
       .feed-layout { grid-template-columns: 160px 1fr; }
-      .feed-rail { display: none; }
+      .feed-section-row { grid-template-columns: 1fr; }
+      .feed-section-row__ad { display: none; }
       .feed-ad--between { display: block; }
     }
     /* Left sidebar also collapses */
     @media (max-width: 960px) {
-      .masthead__inner { gap: 12px; }
       .footer__grid { grid-template-columns: 1fr 1fr; }
       .feed-layout { grid-template-columns: 1fr; }
       .feed-sidebar { display: none; }
@@ -679,133 +782,205 @@
     }
 
     @media (max-width: 768px) {
-      .masthead__title { font-size: 26px; }
-      .masthead__date { padding-left: 0; margin-top: 8px; }
-      .feed-card { flex-direction: column; gap: 16px; }
-      .feed-card__img-link { width: 100%; }
-      .feed-card__img-placeholder { width: 100%; height: auto; aspect-ratio: 1/1; }
-      .feed-card__headline { font-size: 23px; }
+      /* Header: left-align logo, hide subscribe (it's in the hamburger) */
+      .masthead { grid-template-columns: 1fr auto; }
+      .masthead__spacer { display: none; }
+      .masthead__logo-wrap { justify-self: start; }
+      .masthead__title { font-size: 24px; }
+      .masthead__mountain { width: 36px; height: 28px; }
+      .masthead__subscribe-desktop { display: none; }
+      .slide-menu__subscribe-mobile { display: block; }
+
+      /* Reduce top spacing */
+      .feed-layout { padding-top: 16px; }
+
+      /* Zero out container padding for full-bleed content */
+      .container--wide { padding: 0; }
+
+      /* Underwriting: single inline line */
+      .feed-underwriting {
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        font-size: 11px;
+        padding: 8px 12px;
+      }
+
+      /* Cards: full-width images (square), tight text padding */
+      .feed-card {
+        flex-direction: column;
+        gap: 12px;
+        padding: 0;
+        margin-bottom: 28px;
+        border: none;
+        border-radius: 0;
+      }
+      .feed-card__img-link { width: 100%; display: block; }
+      .feed-card__img-placeholder { width: 100%; height: auto; aspect-ratio: 1/1; border-radius: 0; }
+      .feed-card__body { padding: 0 16px; }
+      .feed-card__headline { font-size: 22px; }
       .feed-card__excerpt { font-size: 16px; }
-      .feed-card--sponsored .feed-card__img-placeholder { width: 100%; height: auto; aspect-ratio: 1/1; }
+
+      /* Section header & underwriting need horizontal padding since container is 0 */
+      .feed-section__header { padding-left: 16px; padding-right: 16px; }
+      .feed-underwriting { margin-left: 0; margin-right: 0; border-radius: 0; }
+      .feed-section__footer { padding-left: 16px; padding-right: 16px; }
+      .feed-ad--between { padding-left: 16px; padding-right: 16px; }
+
+      /* Hero: strip all desktop overlay styling, match normal cards exactly */
+      .feed-card--hero {
+        border-radius: 0;
+        overflow: visible;
+        margin-bottom: 28px;
+        gap: 12px;
+      }
+      .feed-card--hero .feed-card__img-link { width: 100%; }
+      .feed-card--hero .feed-card__img-placeholder { aspect-ratio: 1/1; }
+      .feed-card--hero .feed-card__body {
+        position: relative;
+        background: none;
+        padding: 0 16px;
+        color: var(--ink);
+      }
+      .feed-card--hero .feed-card__headline { color: var(--ink); font-size: 22px; }
+      .feed-card--hero .feed-card__headline a { color: var(--ink); }
+      .feed-card--hero .feed-card__headline a:hover { color: var(--slate); text-decoration: none; }
+      .feed-card--hero .feed-card__excerpt { color: var(--ink-soft); font-size: 16px; }
+      .feed-card--hero .feed-card__meta { color: var(--ink-soft); }
+
+      /* Sponsored card: full-width gray background, no border, label above image */
+      .feed-card--sponsored {
+        padding: 0;
+        border-radius: 0;
+        border: none;
+        background: var(--cream);
+        margin-left: 0;
+        margin-right: 0;
+        gap: 0;
+      }
+      .feed-card--sponsored .feed-card__sponsored-label {
+        display: block;
+        padding: 10px 16px 6px;
+        margin-bottom: 0;
+      }
+      .feed-card--sponsored .feed-card__body::before { display: none; }
+      .feed-card--sponsored .feed-card__img-link { width: 100%; }
+      .feed-card--sponsored .feed-card__img-placeholder { width: 100%; height: auto; aspect-ratio: 1/1; border-radius: 0; }
+      .feed-card--sponsored .feed-card__body { padding: 12px 16px 16px; }
+      .feed-card--sponsored .feed-card__headline { font-size: 20px; }
+      .feed-card--sponsored .feed-card__excerpt { font-size: 15px; }
+
       .newsletter__inner { grid-template-columns: 1fr; gap: 20px; text-align: center; }
       .newsletter__form { justify-content: center; }
       .newsletter__input { width: 220px; }
+      .newsletter .container { padding: 0 24px; }
       .footer__grid { grid-template-columns: 1fr 1fr; }
-      .nav__inner { justify-content: flex-start; overflow-x: auto; }
-      .masthead__right .btn--donate { display: none; }
+      .footer .container { padding: 0 24px; }
     }
 
     @media (max-width: 480px) {
-      .masthead__title { font-size: 22px; }
-      .masthead__mountain { width: 40px; height: 31px; }
-      .masthead__date { display: none; }
-      .masthead__social { display: none; }
+      .masthead__title { font-size: 20px; }
+      .masthead__mountain { width: 32px; height: 25px; }
       .footer__grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── MASTHEAD (no top bar) ─────────────────────── -->
+<!-- ── MASTHEAD (sticky, minimal) ─────────────────── -->
 <header class="masthead">
-  <div class="container">
-    <div class="masthead__inner">
 
-      <!-- Left: logo + date -->
-      <div class="masthead__brand">
-        <div class="masthead__logo-wrap">
-          <svg class="masthead__mountain" viewBox="0 0 80 62" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M40 4L14 46H66L40 4Z" fill="#1a1a2e"/>
-            <path d="M55 18L36 46H74L55 18Z" fill="#3d3d5c"/>
-            <path d="M22 28L6 54H38L22 28Z" fill="#4a7c87" opacity=".8"/>
-            <path d="M4 54H76" stroke="#1a1a2e" stroke-width="3" stroke-linecap="round"/>
-            <path d="M37 4L40 4L43 4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          <h1 class="masthead__title">The Seward Folly</h1>
-        </div>
-        <p class="masthead__date">Thursday, March 19, 2026</p>
-      </div>
+  <!-- Left: spacer for centering -->
+  <div class="masthead__spacer"></div>
 
-      <!-- Right: social icons | Donate | Subscribe Free -->
-      <div class="masthead__right">
-        <div class="masthead__social">
-          <a href="#" title="Facebook">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-            </svg>
-          </a>
-          <a href="#" title="Instagram">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-              <circle cx="12" cy="12" r="4"/>
-              <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
-            </svg>
-          </a>
-        </div>
-        <div class="masthead__sep"></div>
-        <a href="#" class="btn btn--donate">Donate</a>
-        <a href="#" class="btn btn--subscribe">Subscribe Free</a>
-      </div>
+  <!-- Center: logo -->
+  <a href="/" class="masthead__logo-wrap" style="text-decoration:none;">
+    <svg class="masthead__mountain" viewBox="0 0 80 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M40 4L14 46H66L40 4Z" fill="#253446"/>
+      <path d="M55 18L36 46H74L55 18Z" fill="#466168"/>
+      <path d="M22 28L6 54H38L22 28Z" fill="#90a27b" opacity=".8"/>
+      <path d="M4 54H76" stroke="#253446" stroke-width="3" stroke-linecap="round"/>
+      <path d="M37 4L40 4L43 4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <h1 class="masthead__title">The Seward Folly</h1>
+  </a>
 
-    </div>
+  <!-- Right: Subscribe + Hamburger -->
+  <div class="masthead__right">
+    <a href="#" class="btn btn--subscribe masthead__subscribe-desktop">Subscribe</a>
+    <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+      <span class="hamburger__lines">
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
+      </span>
+    </button>
   </div>
+
 </header>
 
-<!-- ── NAV ──────────────────────────────────────── -->
-<nav class="nav">
-  <div class="container">
-    <div class="nav__inner">
+<!-- ── SLIDE-OUT MENU ────────────────────────────── -->
+<div class="menu-overlay" id="menu-overlay"></div>
+<nav class="slide-menu" id="slide-menu" aria-label="Main navigation">
 
-      <!-- News dropdown -->
-      <div class="nav__item">
-        <a href="#" class="nav__link">News ▾</a>
-        <div class="nav__dropdown">
-          <a href="#">Arts &amp; Entertainment</a>
-          <a href="#">Business</a>
-          <a href="#">Community</a>
-          <a href="#">Education</a>
-          <a href="#">Government</a>
-          <a href="#">Health</a>
-          <a href="#">Housing</a>
-          <a href="#">Obituaries</a>
-          <a href="#">Opinions</a>
-          <a href="#">Police &amp; Fire</a>
-          <a href="#">Sports</a>
-        </div>
-      </div>
-
-      <!-- Resources dropdown -->
-      <div class="nav__item">
-        <a href="#" class="nav__link">Resources ▾</a>
-        <div class="nav__dropdown">
-          <a href="#">Business Directory</a>
-          <a href="#">Business Login</a>
-          <a href="#">Calendar</a>
-          <a href="#">Links</a>
-          <a href="#">Public Notices</a>
-        </div>
-      </div>
-
-      <!-- About dropdown -->
-      <div class="nav__item">
-        <a href="#" class="nav__link">About ▾</a>
-        <div class="nav__dropdown">
-          <a href="#">About Us</a>
-          <a href="#">Advertise</a>
-          <a href="#">Contact</a>
-          <a href="#">Donate</a>
-          <a href="#">Sponsors</a>
-          <a href="#">Submit a Story</a>
-        </div>
-      </div>
-
-      <!-- Subscribe CTA — always visible -->
-      <div class="nav__item">
-        <a href="#" class="nav__link nav__link--subscribe">Subscribe Free</a>
-      </div>
-
-    </div>
+  <div class="slide-menu__close">
+    <button class="slide-menu__close-btn" id="menu-close-btn" aria-label="Close menu">✕</button>
   </div>
+
+  <div class="slide-menu__subscribe-mobile" style="padding:16px 24px; border-bottom:1px solid var(--divider);">
+    <a href="#" class="btn btn--subscribe" style="width:100%; justify-content:center;">Subscribe</a>
+  </div>
+
+  <div class="slide-menu__section">
+    <button class="slide-menu__heading" data-menu-toggle="menu-news">
+      News <span class="slide-menu__arrow">▾</span>
+    </button>
+    <ul class="slide-menu__links" id="menu-news">
+      <li><a href="#">Arts &amp; Entertainment</a></li>
+      <li><a href="#">Business</a></li>
+      <li><a href="#">Community</a></li>
+      <li><a href="#">Education</a></li>
+      <li><a href="#">Government</a></li>
+      <li><a href="#">Health</a></li>
+      <li><a href="#">Housing</a></li>
+      <li><a href="#">Obituaries</a></li>
+      <li><a href="#">Opinions</a></li>
+      <li><a href="#">Police &amp; Fire</a></li>
+      <li><a href="#">Sports</a></li>
+    </ul>
+  </div>
+
+  <div class="slide-menu__section">
+    <button class="slide-menu__heading" data-menu-toggle="menu-resources">
+      Resources <span class="slide-menu__arrow">▾</span>
+    </button>
+    <ul class="slide-menu__links" id="menu-resources">
+      <li><a href="#">Business Directory</a></li>
+      <li><a href="#">Business Login</a></li>
+      <li><a href="#">Calendar</a></li>
+      <li><a href="#">Links</a></li>
+      <li><a href="#">Public Notices</a></li>
+    </ul>
+  </div>
+
+  <div class="slide-menu__section">
+    <button class="slide-menu__heading" data-menu-toggle="menu-about">
+      About <span class="slide-menu__arrow">▾</span>
+    </button>
+    <ul class="slide-menu__links" id="menu-about">
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Advertise</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Donate</a></li>
+      <li><a href="#">Sponsors</a></li>
+      <li><a href="#">Submit a Story</a></li>
+    </ul>
+  </div>
+
+  <div class="slide-menu__contact">
+    P.O. Box 1983 · Seward, AK 99664<br>
+    <a href="mailto:sewardsfolly25@gmail.com">sewardsfolly25@gmail.com</a>
+  </div>
+
 </nav>
 
 <!-- ── MAIN CONTENT ──────────────────────────────── -->
@@ -834,6 +1009,7 @@
       <div class="feed-main">
 
         <!-- ═══ FEATURED ═══════════════════════════════ -->
+        <div class="feed-section-row">
         <section class="feed-section" id="section-featured">
           <div class="feed-section__header">
             <h2 class="feed-section__title">Featured</h2>
@@ -845,7 +1021,7 @@
             · <a href="#">Become an underwriter</a>
           </div>
 
-          <article class="feed-card">
+          <article class="feed-card feed-card--hero">
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(160deg,#2c3e50 0%,#4a7c87 60%,#7a8c6e 100%);"></div></a>
             <div class="feed-card__body">
               <h2 class="feed-card__headline"><a href="#">Travis Beals of Seward takes second place in the 2026 Iditarod Trail Sled Dog Race</a></h2>
@@ -872,9 +1048,9 @@
 
           <!-- Sponsored content card -->
           <article class="feed-card feed-card--sponsored">
+            <div class="feed-card__sponsored-label">Sponsored</div>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#3a6a5a,#5a9a7a);"></div></a>
             <div class="feed-card__body">
-              <div class="feed-card__sponsored-label">Sponsored</div>
               <h2 class="feed-card__headline"><a href="#">Kenai Fjords Tours kicks off 2026 season with new wildlife cruise routes</a></h2>
               <p class="feed-card__excerpt">Explore expanded glacier and wildlife itineraries this summer, including a new full-day Northwestern Fjord expedition departing from Seward's small boat harbor.</p>
               <a href="#" class="feed-card__cta">Book Your Tour →</a>
@@ -882,6 +1058,13 @@
           </article>
 
         </section>
+        <div class="feed-section-row__ad">
+          <div class="feed-rail__ad-label">Advertisement</div>
+          <div class="feed-rail__ad-box">
+            <div class="feed-rail__ad-placeholder">300 × 300<br><a href="#">Advertise with<br>The Folly</a></div>
+          </div>
+        </div>
+        </div><!-- /feed-section-row -->
 
         <!-- ── Between-section ad (visible at narrow widths) ── -->
         <div class="feed-ad--between">
@@ -892,6 +1075,7 @@
         </div>
 
         <!-- ═══ BUSINESS ═══════════════════════════════ -->
+        <div class="feed-section-row">
         <section class="feed-section" id="section-business">
           <div class="feed-section__header">
             <h2 class="feed-section__title">Business</h2>
@@ -914,9 +1098,9 @@
 
           <!-- Sponsored content card -->
           <article class="feed-card feed-card--sponsored">
+            <div class="feed-card__sponsored-label">Sponsored</div>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#4a6a3a,#6a8a4a);"></div></a>
             <div class="feed-card__body">
-              <div class="feed-card__sponsored-label">Sponsored</div>
               <h2 class="feed-card__headline"><a href="#">Seward Brewing Company now open for the season — new spring menu available</a></h2>
               <p class="feed-card__excerpt">Stop by for locally brewed craft beers, fresh halibut tacos, and live music every Friday night. Located on Fourth Avenue, steps from the harbor.</p>
               <a href="#" class="feed-card__cta">View Menu →</a>
@@ -927,6 +1111,13 @@
             <div class="feed-section__actions"><a href="#" class="feed-section__more">More Business →</a></div>
           </div>
         </section>
+        <div class="feed-section-row__ad">
+          <div class="feed-rail__ad-label">Advertisement</div>
+          <div class="feed-rail__ad-box">
+            <div class="feed-rail__ad-placeholder">300 × 300<br><a href="#">Advertise with<br>The Folly</a></div>
+          </div>
+        </div>
+        </div><!-- /feed-section-row -->
 
         <div class="feed-ad--between">
           <div class="feed-rail__ad-label">Advertisement</div>
@@ -936,6 +1127,7 @@
         </div>
 
         <!-- ═══ COMMUNITY ══════════════════════════════ -->
+        <div class="feed-section-row">
         <section class="feed-section" id="section-community">
           <div class="feed-section__header">
             <h2 class="feed-section__title">Community</h2>
@@ -966,9 +1158,9 @@
 
           <!-- Sponsored content card -->
           <article class="feed-card feed-card--sponsored">
+            <div class="feed-card__sponsored-label">Sponsored</div>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#5a4a3a,#8a7a5a);"></div></a>
             <div class="feed-card__body">
-              <div class="feed-card__sponsored-label">Sponsored</div>
               <h2 class="feed-card__headline"><a href="#">Resurrect Art Coffee House — spring open mic nights are back</a></h2>
               <p class="feed-card__excerpt">Join us every Thursday evening for live music, poetry, and community. Locally roasted coffee, housemade pastries, and good company downtown on Third Avenue.</p>
               <a href="#" class="feed-card__cta">See the Schedule →</a>
@@ -979,6 +1171,13 @@
             <div class="feed-section__actions"><a href="#" class="feed-section__more">More Community →</a></div>
           </div>
         </section>
+        <div class="feed-section-row__ad">
+          <div class="feed-rail__ad-label">Advertisement</div>
+          <div class="feed-rail__ad-box">
+            <div class="feed-rail__ad-placeholder">300 × 300<br><a href="#">Advertise with<br>The Folly</a></div>
+          </div>
+        </div>
+        </div><!-- /feed-section-row -->
 
         <div class="feed-ad--between">
           <div class="feed-rail__ad-label">Advertisement</div>
@@ -988,6 +1187,7 @@
         </div>
 
         <!-- ═══ EDUCATION ══════════════════════════════ -->
+        <div class="feed-section-row">
         <section class="feed-section" id="section-education">
           <div class="feed-section__header">
             <h2 class="feed-section__title">Education</h2>
@@ -1018,9 +1218,9 @@
 
           <!-- Sponsored content card -->
           <article class="feed-card feed-card--sponsored">
+            <div class="feed-card__sponsored-label">Sponsored</div>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#2a4a6a,#4a7a9a);"></div></a>
             <div class="feed-card__body">
-              <div class="feed-card__sponsored-label">Sponsored</div>
               <h2 class="feed-card__headline"><a href="#">Alaska SeaLife Center summer internship applications now open</a></h2>
               <p class="feed-card__excerpt">High school and college students can apply for hands-on marine research internships at Seward's premier ocean wildlife facility. Deadline is April 15.</p>
               <a href="#" class="feed-card__cta">Apply Now →</a>
@@ -1031,6 +1231,13 @@
             <div class="feed-section__actions"><a href="#" class="feed-section__more">More Education →</a></div>
           </div>
         </section>
+        <div class="feed-section-row__ad">
+          <div class="feed-rail__ad-label">Advertisement</div>
+          <div class="feed-rail__ad-box">
+            <div class="feed-rail__ad-placeholder">300 × 300<br><a href="#">Advertise with<br>The Folly</a></div>
+          </div>
+        </div>
+        </div><!-- /feed-section-row -->
 
         <div class="feed-ad--between">
           <div class="feed-rail__ad-label">Advertisement</div>
@@ -1040,6 +1247,7 @@
         </div>
 
         <!-- ═══ GOVERNMENT ═════════════════════════════ -->
+        <div class="feed-section-row">
         <section class="feed-section" id="section-government">
           <div class="feed-section__header">
             <h2 class="feed-section__title">Government</h2>
@@ -1062,9 +1270,9 @@
 
           <!-- Sponsored content card -->
           <article class="feed-card feed-card--sponsored">
+            <div class="feed-card__sponsored-label">Sponsored</div>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#3a4a5a,#5a7a8a);"></div></a>
             <div class="feed-card__body">
-              <div class="feed-card__sponsored-label">Sponsored</div>
               <h2 class="feed-card__headline"><a href="#">Kenai Peninsula Borough — 2026 property tax assessments now available online</a></h2>
               <p class="feed-card__excerpt">Review your property valuation and file an appeal if needed before the May 1 deadline. Access your records through the borough's updated online portal.</p>
               <a href="#" class="feed-card__cta">Check Your Assessment →</a>
@@ -1075,6 +1283,13 @@
             <div class="feed-section__actions"><a href="#" class="feed-section__more">More Government →</a></div>
           </div>
         </section>
+        <div class="feed-section-row__ad">
+          <div class="feed-rail__ad-label">Advertisement</div>
+          <div class="feed-rail__ad-box">
+            <div class="feed-rail__ad-placeholder">300 × 300<br><a href="#">Advertise with<br>The Folly</a></div>
+          </div>
+        </div>
+        </div><!-- /feed-section-row -->
 
         <div class="feed-ad--between">
           <div class="feed-rail__ad-label">Advertisement</div>
@@ -1084,6 +1299,7 @@
         </div>
 
         <!-- ═══ HEALTH ═════════════════════════════════ -->
+        <div class="feed-section-row">
         <section class="feed-section" id="section-health">
           <div class="feed-section__header">
             <h2 class="feed-section__title">Health</h2>
@@ -1106,9 +1322,9 @@
 
           <!-- Sponsored content card -->
           <article class="feed-card feed-card--sponsored">
+            <div class="feed-card__sponsored-label">Sponsored</div>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#4a7a6a,#6a9a8a);"></div></a>
             <div class="feed-card__body">
-              <div class="feed-card__sponsored-label">Sponsored</div>
               <h2 class="feed-card__headline"><a href="#">Seward Community Health Center — now accepting new patients for primary care</a></h2>
               <p class="feed-card__excerpt">Affordable, sliding-scale primary care for individuals and families. Walk-ins welcome, or schedule an appointment online. Open Monday through Saturday.</p>
               <a href="#" class="feed-card__cta">Schedule a Visit →</a>
@@ -1119,6 +1335,13 @@
             <div class="feed-section__actions"><a href="#" class="feed-section__more">More Health →</a></div>
           </div>
         </section>
+        <div class="feed-section-row__ad">
+          <div class="feed-rail__ad-label">Advertisement</div>
+          <div class="feed-rail__ad-box">
+            <div class="feed-rail__ad-placeholder">300 × 300<br><a href="#">Advertise with<br>The Folly</a></div>
+          </div>
+        </div>
+        </div><!-- /feed-section-row -->
 
         <div class="feed-ad--between">
           <div class="feed-rail__ad-label">Advertisement</div>
@@ -1128,6 +1351,7 @@
         </div>
 
         <!-- ═══ HOUSING ════════════════════════════════ -->
+        <div class="feed-section-row">
         <section class="feed-section" id="section-housing">
           <div class="feed-section__header">
             <h2 class="feed-section__title">Housing</h2>
@@ -1150,9 +1374,9 @@
 
           <!-- Sponsored content card -->
           <article class="feed-card feed-card--sponsored">
+            <div class="feed-card__sponsored-label">Sponsored</div>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#5a6a4a,#7a8a6a);"></div></a>
             <div class="feed-card__body">
-              <div class="feed-card__sponsored-label">Sponsored</div>
               <h2 class="feed-card__headline"><a href="#">Coastal Realty Group — spring listings in Seward and the Kenai Peninsula</a></h2>
               <p class="feed-card__excerpt">New homes, cabins, and waterfront properties now available. Free market analysis for sellers. Contact us for a showing or browse listings online.</p>
               <a href="#" class="feed-card__cta">Browse Listings →</a>
@@ -1163,6 +1387,13 @@
             <div class="feed-section__actions"><a href="#" class="feed-section__more">More Housing →</a></div>
           </div>
         </section>
+        <div class="feed-section-row__ad">
+          <div class="feed-rail__ad-label">Advertisement</div>
+          <div class="feed-rail__ad-box">
+            <div class="feed-rail__ad-placeholder">300 × 300<br><a href="#">Advertise with<br>The Folly</a></div>
+          </div>
+        </div>
+        </div><!-- /feed-section-row -->
 
         <div class="feed-ad--between">
           <div class="feed-rail__ad-label">Advertisement</div>
@@ -1172,6 +1403,7 @@
         </div>
 
         <!-- ═══ OPINIONS ═══════════════════════════════ -->
+        <div class="feed-section-row">
         <section class="feed-section" id="section-opinions">
           <div class="feed-section__header">
             <h2 class="feed-section__title">Opinions</h2>
@@ -1194,9 +1426,9 @@
 
           <!-- Sponsored content card -->
           <article class="feed-card feed-card--sponsored">
+            <div class="feed-card__sponsored-label">Sponsored</div>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#6a5a3a,#9a8a5a);"></div></a>
             <div class="feed-card__body">
-              <div class="feed-card__sponsored-label">Sponsored</div>
               <h2 class="feed-card__headline"><a href="#">Seward Community Library — free digital literacy workshops every Wednesday</a></h2>
               <p class="feed-card__excerpt">Learn email basics, online safety, and how to navigate government services online. Open to all ages, no registration required. Held at the community room.</p>
               <a href="#" class="feed-card__cta">See Workshop Details →</a>
@@ -1207,6 +1439,13 @@
             <div class="feed-section__actions"><a href="#" class="feed-section__more">More Opinions →</a></div>
           </div>
         </section>
+        <div class="feed-section-row__ad">
+          <div class="feed-rail__ad-label">Advertisement</div>
+          <div class="feed-rail__ad-box">
+            <div class="feed-rail__ad-placeholder">300 × 300<br><a href="#">Advertise with<br>The Folly</a></div>
+          </div>
+        </div>
+        </div><!-- /feed-section-row -->
 
         <div class="feed-ad--between">
           <div class="feed-rail__ad-label">Advertisement</div>
@@ -1216,6 +1455,7 @@
         </div>
 
         <!-- ═══ POLICE & FIRE ══════════════════════════ -->
+        <div class="feed-section-row">
         <section class="feed-section" id="section-police-fire">
           <div class="feed-section__header">
             <h2 class="feed-section__title">Police &amp; Fire</h2>
@@ -1246,9 +1486,9 @@
 
           <!-- Sponsored content card -->
           <article class="feed-card feed-card--sponsored">
+            <div class="feed-card__sponsored-label">Sponsored</div>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#3a3a5a,#5a5a7a);"></div></a>
             <div class="feed-card__body">
-              <div class="feed-card__sponsored-label">Sponsored</div>
               <h2 class="feed-card__headline"><a href="#">Seward Volunteer Fire Department — spring recruitment drive underway</a></h2>
               <p class="feed-card__excerpt">No experience needed. Training provided. Join the team that protects our community. Applications accepted through April 30 at the station on Van Buren Street.</p>
               <a href="#" class="feed-card__cta">Learn How to Join →</a>
@@ -1259,6 +1499,13 @@
             <div class="feed-section__actions"><a href="#" class="feed-section__more">More Police &amp; Fire →</a></div>
           </div>
         </section>
+        <div class="feed-section-row__ad">
+          <div class="feed-rail__ad-label">Advertisement</div>
+          <div class="feed-rail__ad-box">
+            <div class="feed-rail__ad-placeholder">300 × 300<br><a href="#">Advertise with<br>The Folly</a></div>
+          </div>
+        </div>
+        </div><!-- /feed-section-row -->
 
         <div class="feed-ad--between">
           <div class="feed-rail__ad-label">Advertisement</div>
@@ -1268,6 +1515,7 @@
         </div>
 
         <!-- ═══ SPORTS ═════════════════════════════════ -->
+        <div class="feed-section-row">
         <section class="feed-section" id="section-sports">
           <div class="feed-section__header">
             <h2 class="feed-section__title">Sports</h2>
@@ -1290,9 +1538,9 @@
 
           <!-- Sponsored content card -->
           <article class="feed-card feed-card--sponsored">
+            <div class="feed-card__sponsored-label">Sponsored</div>
             <a href="#" class="feed-card__img-link"><div class="feed-card__img-placeholder" style="background:linear-gradient(135deg,#2a5a4a,#4a8a6a);"></div></a>
             <div class="feed-card__body">
-              <div class="feed-card__sponsored-label">Sponsored</div>
               <h2 class="feed-card__headline"><a href="#">Seward Parks &amp; Rec — youth spring sports registration now open</a></h2>
               <p class="feed-card__excerpt">Sign up for baseball, soccer, and track &amp; field programs for ages 6–18. Early bird pricing available through March 31. Volunteer coaches also needed.</p>
               <a href="#" class="feed-card__cta">Register Your Kid →</a>
@@ -1303,48 +1551,15 @@
             <div class="feed-section__actions"><a href="#" class="feed-section__more">More Sports →</a></div>
           </div>
         </section>
+        <div class="feed-section-row__ad">
+          <div class="feed-rail__ad-label">Advertisement</div>
+          <div class="feed-rail__ad-box">
+            <div class="feed-rail__ad-placeholder">300 × 300<br><a href="#">Advertise with<br>The Folly</a></div>
+          </div>
+        </div>
+        </div><!-- /feed-section-row -->
 
       </div><!-- /feed-main -->
-
-      <!-- ── RIGHT RAIL (ad column) ────────────────── -->
-      <aside class="feed-rail">
-        <div class="feed-rail__ad">
-          <div class="feed-rail__ad-label">Advertisement</div>
-          <div class="feed-rail__ad-box">
-            <div class="feed-rail__ad-placeholder">300 × 300<br><a href="#">Advertise with<br>The Folly</a></div>
-          </div>
-        </div>
-        <div class="feed-rail__ad">
-          <div class="feed-rail__ad-label">Advertisement</div>
-          <div class="feed-rail__ad-box">
-            <div class="feed-rail__ad-placeholder">300 × 300<br><a href="#">Advertise with<br>The Folly</a></div>
-          </div>
-        </div>
-        <div class="feed-rail__ad">
-          <div class="feed-rail__ad-label">Advertisement</div>
-          <div class="feed-rail__ad-box">
-            <div class="feed-rail__ad-placeholder">300 × 300<br><a href="#">Advertise with<br>The Folly</a></div>
-          </div>
-        </div>
-        <div class="feed-rail__ad">
-          <div class="feed-rail__ad-label">Advertisement</div>
-          <div class="feed-rail__ad-box">
-            <div class="feed-rail__ad-placeholder">300 × 300<br><a href="#">Advertise with<br>The Folly</a></div>
-          </div>
-        </div>
-        <div class="feed-rail__ad">
-          <div class="feed-rail__ad-label">Advertisement</div>
-          <div class="feed-rail__ad-box">
-            <div class="feed-rail__ad-placeholder">300 × 300<br><a href="#">Advertise with<br>The Folly</a></div>
-          </div>
-        </div>
-        <div class="feed-rail__ad">
-          <div class="feed-rail__ad-label">Advertisement</div>
-          <div class="feed-rail__ad-box">
-            <div class="feed-rail__ad-placeholder">300 × 300<br><a href="#">Advertise with<br>The Folly</a></div>
-          </div>
-        </div>
-      </aside>
 
     </div><!-- /feed-layout -->
   </div><!-- /container -->
@@ -1360,7 +1575,7 @@
         </div>
         <form class="newsletter__form" onsubmit="return false;">
           <input class="newsletter__input" type="email" placeholder="your@email.com" />
-          <button class="newsletter__submit" type="submit">Subscribe Free</button>
+          <button class="newsletter__submit" type="submit">Subscribe</button>
         </form>
       </div>
     </div>
@@ -1446,6 +1661,52 @@
     </div>
   </div>
 </footer>
+
+<script>
+  // Hamburger menu toggle
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const menuCloseBtn = document.getElementById('menu-close-btn');
+  const slideMenu = document.getElementById('slide-menu');
+  const menuOverlay = document.getElementById('menu-overlay');
+
+  function openMenu() {
+    slideMenu.classList.add('slide-menu--open');
+    menuOverlay.classList.add('menu-overlay--open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    slideMenu.classList.remove('slide-menu--open');
+    menuOverlay.classList.remove('menu-overlay--open');
+    document.body.style.overflow = '';
+  }
+
+  hamburgerBtn.addEventListener('click', openMenu);
+  menuCloseBtn.addEventListener('click', closeMenu);
+  menuOverlay.addEventListener('click', closeMenu);
+
+  // Accordion toggles (all collapsed by default)
+  document.querySelectorAll('[data-menu-toggle]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const targetId = btn.getAttribute('data-menu-toggle');
+      const target = document.getElementById(targetId);
+      const isOpen = target.classList.contains('slide-menu__links--open');
+
+      // Close all
+      document.querySelectorAll('.slide-menu__links').forEach(function (el) {
+        el.classList.remove('slide-menu__links--open');
+      });
+      document.querySelectorAll('.slide-menu__heading').forEach(function (el) {
+        el.classList.remove('slide-menu__heading--open');
+      });
+
+      // Open clicked if it was closed
+      if (!isOpen) {
+        target.classList.add('slide-menu__links--open');
+        btn.classList.add('slide-menu__heading--open');
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
